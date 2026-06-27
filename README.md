@@ -59,4 +59,4 @@ The design is intended to feel:
 Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/my-portfolio.git
+git clone https://github.com/seandevlog/my-portfolio.git
