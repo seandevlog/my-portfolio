@@ -40,16 +40,6 @@ I am focused on building:
 - Developer profile
 - Contact endpoint
 
-## Featured Projects
-
-### Inventory Management System
-
-A full-stack inventory management app built with structured data, CRUD workflows, and an intuitive admin interface to help teams manage products, stock levels, and operational records more efficiently.
-
-### Municipal Content Management Platform
-
-A full-stack municipal web platform built for publishing announcements, managing news content, and supporting organized, accessible communication between local government and the community.
-
 ## Design Direction
 
 The visual direction of this portfolio follows a structured “systems interface” theme. It uses a dark technical layout, system-style labels, grid-based visuals, and warm accent details to communicate reliability, clarity, and practical system-building.
