@@ -1,0 +1,102 @@
+@import "tailwindcss";
+
+@theme {
+  /* Custom breakpoints */
+  --breakpoint-*: initial;
+  --breakpoint-xs: 20rem;   /* 320px */
+  --breakpoint-s: 36rem;    /* 576px */
+  --breakpoint-m: 48rem;    /* 768px */
+  --breakpoint-l: 62rem;    /* 992px */
+  --breakpoint-xl: 75rem;   /* 1200px */
+
+  /* Fonts */
+  --font-outfit: var(--font-outfit);
+  --font-jetbrains: var(--font-jetbrains);
+
+  /* Colors */
+  --color-primary-base: #07152B;
+  --color-primary-light: #1A2A44;
+
+  --color-secondary-base: #F97316;
+  --color-secondary-lightest: #E0C0B1;
+  --color-secondary-lighter: #FFB690;
+  --color-secondary-light: #DE8557;
+  --color-secondary-dark: #582200;
+
+  --color-accent-base: #B7C7E8;
+  --color-accent-light: #E0E3E5;
+
+  --color-status-blue: rgb(24, 65, 255);
+  --color-black-base: #101415;
+
+  /* Headings */
+  --text-h1-xs: 26px;
+  --text-h1-s: 40px;
+  --text-h1-m: 58px;
+  --text-h1-l: 70px;
+
+  --text-h2-xs: 24px;
+  --text-h2-s: 28px;
+  --text-h2-m: 36px;
+  --text-h2-l: 50px;
+
+  --text-h3-xs: 16px;
+  --text-h3-s: 18px;
+  --text-h3-m: 24px;
+  --text-h3-l: 30px;
+
+  /* Paragraphs */
+  --text-p1-xs: 14px;
+  --text-p1-s: 16px;
+  --text-p1-m: 18px;
+  --text-p1-l: 20px;
+  --text-p1-xl: 22px;
+
+  --text-p2-xs: 12px;
+  --text-p2-s: 13px;
+  --text-p2-m: 14px;
+  --text-p2-l: 15px;
+  --text-p2-xl: 16px;
+
+  /* Links / Buttons */
+  --text-link-xs: 10px;
+  --text-link-s: 12px;
+
+  --text-button-xs: 12px;
+  --text-button-m: 14px;
+
+  --text-back-xs: 16px;
+
+  /* Section spacing */
+  --spacing-section-x-xs: 40px;
+  --spacing-section-x-s: 60px;
+  --spacing-section-x-m: 100px;
+  --spacing-section-x-l: 120px;
+
+  --spacing-section-y-xs: 30px;
+  --spacing-section-y-s: 52px;
+  --spacing-section-y-m: 75px;
+  --spacing-section-y-l: 97px;
+  --spacing-section-y-xl: 120px;
+
+  /* Section widths */
+  --spacing-section-minw-xs: 300px;
+  --spacing-section-minw-s: 500px;
+  --spacing-section-minw-m: 700px;
+  --spacing-section-minw-l: 900px;
+}
+
+@layer utilities {
+  .system-grid-bg {
+    background-color: #07152b;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.08), transparent 35%),
+      linear-gradient(rgba(183, 199, 232, 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(183, 199, 232, 0.05) 1px, transparent 1px);
+    
+    background-size: 
+      100% 100%,
+      24px 24px,
+      24px 24px;
+  }
+}
