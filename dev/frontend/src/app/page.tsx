@@ -1,4 +1,5 @@
 import HomeHero from "@/components/home/HomeHero";
+import HomeProjects from "@/components/home/HomeProjects";
 import Navbar from "@/components/ui/Navbar";
 
 export default function Home() {
@@ -6,6 +7,7 @@ export default function Home() {
     <>
       <HomeHero/>
       <Navbar/>
+      <HomeProjects/>
     </>
   );
 }

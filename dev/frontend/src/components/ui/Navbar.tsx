@@ -2,7 +2,7 @@ import { SquareTerminal } from "lucide-react";
 
 export default function Navbar() {
   return (
-    <div className="w-full h-fit sticky top-0 flex justify-center items-center px-[24px] py-[15px] bg-black-base border border-[#ffffff10]">
+    <div className="w-full h-fit sticky z-10 top-0 flex justify-center items-center px-[24px] py-[15px] bg-black-base border border-[#ffffff10]">
       <div className="w-full h-fit min-w-section-minw-xs flex flex-wrap justify-between gap-x-[20px] gap-y-[15px]">
         <div className="w-fit h-fit flex items-center gap-[5px] ">
           <SquareTerminal className="h-[20px] w-[20px] stroke-secondary-lighter"/>
