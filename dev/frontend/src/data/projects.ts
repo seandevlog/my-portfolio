@@ -1,6 +1,6 @@
-import Project from "@/types/projects"
+import type Project from "@/types/projects"
 
-const projects: Project[] = [
+const Projects: Project[] = [
   {
     title: "San Lorenzo Ruiz",
     
@@ -301,6 +301,6 @@ const projects: Project[] = [
       "Challenge: Deploying a Node/Express project. Decision: Configured the app for Vercel deployment. Result: I learned how to prepare a server-rendered Express project for a hosted environment.",
     ],
   }
-]
+];
 
-export default projects;
+export default Projects;
