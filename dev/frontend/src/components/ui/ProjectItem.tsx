@@ -1,11 +1,12 @@
 "use client";
 
-import { 
-  Dispatch, 
-  SetStateAction, 
-  useLayoutEffect, 
-  useRef, 
-  useState 
+import {
+  Dispatch,
+  KeyboardEvent,
+  SetStateAction,
+  useLayoutEffect,
+  useRef,
+  useState,
 } from "react";
 import type ProjectType from "@/types/projects";
 
@@ -64,11 +65,6 @@ export default function ProjectItem({
       },
       {
         root: null,
-
-        /**
-         * Opens the project only when the title is around
-         * the middle of the visible screen.
-         */
         rootMargin: "-45% 0px -45% 0px",
         threshold: 0,
       }
@@ -85,10 +81,10 @@ export default function ProjectItem({
     const observer = new IntersectionObserver(
       ([entry]) => {
         /**
-         * Only close this project if it is the active one
-         * and it is almost fully outside the viewport.
+         * Close only when the active item is almost gone,
+         * not just because it left the center.
          */
-        if (isActive && entry.intersectionRatio < 1) {
+        if (isActive && entry.intersectionRatio < 0.08) {
           setActiveProject((current) =>
             current === project.title ? null : current
           );
@@ -105,6 +101,36 @@ export default function ProjectItem({
     return () => observer.disconnect();
   }, [isActive, project.title, setActiveProject]);
 
+  const scrollProjectToCenter = () => {
+    if (!itemRef.current || isActive) return;
+
+    const itemTop = itemRef.current.getBoundingClientRect().top + window.scrollY;
+
+    /**
+     * When expanded, the title sits below the stack.
+     * So we scroll based on the title's expanded position,
+     * not the collapsed position.
+     */
+    const expandedTitleCenter =
+      itemTop + sizes.stack + GAP + sizes.title / 2;
+
+    const targetScrollY = expandedTitleCenter - window.innerHeight / 2;
+
+    setActiveProject(project.title);
+
+    window.scrollTo({
+      top: targetScrollY,
+      behavior: "smooth",
+    });
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      scrollProjectToCenter();
+    }
+  };
+
   const isMeasured = sizes.title > 0;
 
   const collapsedHeight = sizes.title;
@@ -113,6 +139,10 @@ export default function ProjectItem({
   return (
     <div
       ref={itemRef}
+      role="button"
+      tabIndex={0}
+      onClick={scrollProjectToCenter}
+      onKeyDown={handleKeyDown}
       style={{
         height: isMeasured
           ? isActive
@@ -120,7 +150,10 @@ export default function ProjectItem({
             : collapsedHeight
           : "auto",
       }}
-      className="relative w-full overflow-hidden transition-[height] duration-700 ease-out"
+      className={`
+        relative w-full overflow-hidden transition-[height] duration-700 ease-out
+        ${isActive ? "cursor-default" : "cursor-pointer"}
+      `}
     >
       <div
         style={{

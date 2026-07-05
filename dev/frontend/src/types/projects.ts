@@ -31,6 +31,7 @@ type ProjectPreview = {
 
 export default interface Project {
   title: string,
+  date: Date,
   description: {
     short: string,
 

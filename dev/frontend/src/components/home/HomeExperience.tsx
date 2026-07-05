@@ -4,7 +4,7 @@ import Experiences from "@/data/experience";
 
 export default function HomeExperience() {
   return (
-    <section className="flex h-fit w-full flex-col items-center justify-center gap-[40px] px-section-x-xs py-section-y-xs s:px-section-x-s s:py-section-y-s m:px-section-x-m m:py-section-y-m l:px-section-x-l l:py-section-y-l xl:py-section-y-xl">
+    <section className="flex h-fit m:min-h-dvh w-full flex-col items-center justify-center gap-[40px] px-section-x-xs py-section-y-xs s:px-section-x-s s:py-section-y-s m:px-section-x-m m:py-section-y-m l:px-section-x-l l:py-section-y-l xl:py-section-y-xl">
       <div className="flex h-fit w-full min-w-section-minw-xs flex-col gap-[12px] s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l">
         <Status color="bg-[#f97316]">system_status: experience</Status>
 

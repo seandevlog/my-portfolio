@@ -4,19 +4,19 @@ import React, { Dispatch, SetStateAction } from "react";
 import ProjectItem from "../ui/ProjectItem";
 import type Project from "@/types/projects";
 
-type ProjectsListProps = {
+type ProjectsSectionProps = {
   projects: Project[];
   activeProject: string | null;
   setActiveProject: Dispatch<SetStateAction<string | null>>;
 };
 
-export default function ProjectsList({
+export default function ProjectsSection({
   projects,
   activeProject,
   setActiveProject,
-}: ProjectsListProps) {
+}: ProjectsSectionProps) {
   return (
-    <div className="flex h-fit w-full flex-col gap-[16px] pl-[20px] m:w-[calc(100%-290px)]">
+    <div className="flex h-fit w-full flex-col gap-[16px] pl-[20px]">
       {projects.map((project, index, array) => (
         <React.Fragment key={project.title}>
           <ProjectItem

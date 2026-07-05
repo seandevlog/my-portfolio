@@ -3,7 +3,7 @@ import type Project from "@/types/projects"
 const Projects: Project[] = [
   {
     title: "San Lorenzo Ruiz",
-    
+    date: new Date("2026-06-01"),
     description: {
       short: 
         "A full-stack municipal web platform for publishing announcements, managing news content, and supporting organized public communication.",
@@ -63,14 +63,14 @@ const Projects: Project[] = [
       "Built a full-stack content management system with Next.js, Spring Boot, PostgreSQL, and Amazon S3, focusing on maintainable government communication workflows, structured data, and secure admin-side content handling",
 
     architecture: {
-      src: "placeholder-image.png",
+      src: "/placeholder-image.png",
       alt: "Architecture diagram for the municipal content management platform showing Next.js, Spring Boot, PostgreSQL, and Amazon S3",
     },
 
     screenshots: [
       {
         coverImage: {
-          src: "placeholder-image.png",
+          src: "/placeholder-image.png",
           alt: "Municipal admin dashboard interface preview.",
         },
         description:
@@ -78,7 +78,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "placeholder-image.png",
+          src: "/placeholder-image.png",
           alt: "Municipal article editor interface preview.",
         },
         description:
@@ -86,7 +86,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "/images/projects/municipal/public-news.png",
+          src: "/placeholder-image.png",
           alt: "Public municipal news page preview.",
         },
         description:
@@ -103,7 +103,7 @@ const Projects: Project[] = [
   
   {
     title: "Inventory Tracker",
-
+    date: new Date("2026-02-01"),
     description: {
       short:
         "A MERN inventory management system for tracking items, orders, shipments, refunds, billing, and transaction records.",
@@ -168,14 +168,14 @@ const Projects: Project[] = [
       "Built my first personal full-stack MERN inventory system with REST API routes, MongoDB schemas, JWT authentication, Joi validation, Cloudinary image uploads, and organized workflows for inventory, orders, shipments, refunds, billing, and transaction records. The project is feature-heavy and learning-focused, showing my early process of applying many full-stack concepts in one system.",
 
     architecture: {
-      src: "placeholder-image.png",
+      src: "/placeholder-image.png",
       alt: "Architecture diagram for Inventory Tracker showing React, Express, MongoDB, Mongoose, JWT, and Cloudinary.",
     },
 
     screenshots: [
       {
         coverImage: {
-          src: "placeholder-image.png",
+          src: "/placeholder-image.png",
           alt: "Inventory Tracker transactions table preview.",
         },
         description:
@@ -183,7 +183,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "placeholder-image.png",
+          src: "/placeholder-image.png",
           alt: "Inventory Tracker order detail preview.",
         },
         description:
@@ -191,7 +191,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "placeholder-image.png",
+          src: "/placeholder-image.png",
           alt: "Inventory Tracker stock view preview.",
         },
         description:
@@ -210,7 +210,7 @@ const Projects: Project[] = [
 
   {
     title: "Workout Apparel Store",
-
+    date: new Date("2025-04-01"),
     description: {
       short:
         "An Express and EJS workout apparel website focused on server-side validation, email integration, dynamic routing, and deployment practice.",
@@ -264,14 +264,14 @@ const Projects: Project[] = [
       "Built a server-rendered Express and EJS application focused on backend routing, secure form validation, contact form email integration, and deployment workflow practice.",
 
     architecture: {
-      src: "/images/projects/workout-apparel-store/architecture.png",
+      src: "/placeholder-image.png",
       alt: "Architecture diagram for Workout Apparel Store showing Express.js, EJS views, form validation, email integration, and Vercel deployment.",
     },
 
     screenshots: [
       {
         coverImage: {
-          src: "/images/projects/workout-apparel-store/home.png",
+          src: "/placeholder-image.png",
           alt: "Workout Apparel Store homepage preview.",
         },
         description:
@@ -279,7 +279,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "/images/projects/workout-apparel-store/products.png",
+          src: "/placeholder-image.png",
           alt: "Workout Apparel Store product page preview.",
         },
         description:
@@ -287,7 +287,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "/images/projects/workout-apparel-store/contact.png",
+          src: "/placeholder-image.png",
           alt: "Workout Apparel Store contact form preview.",
         },
         description:
