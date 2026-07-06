@@ -5,7 +5,7 @@ import ButtonPrimary from "../ui/ButtonPrimary";
 export default function HomeHero() {
   return (
     <section className="h-dvh w-full flex flex-col items-center justify-center gap-[24px] px-section-x-xs">
-      <Status color="bg-[#10b981]">system_status: active</Status>
+      <Status color="green">system_status: active</Status>
       <span className="w-full s:w-[550px] m:w-[768px] l:w-[959px] max-w-[360px] s:max-w-none text-h1-xs s:text-h1-s m:text-h1-m l:text-h1-l justify-center text-center uppercase">
         <p className="inline-flex items-center gap-2  text-secondary-lighter">backend <X className="w-[20px] h-[20px] s:w-[28px] s:h-[28px] m:w-[48px] m:h-[48px]"/> data</p>
         <p className="text-secondary-lightest">for secure, structured systems</p>

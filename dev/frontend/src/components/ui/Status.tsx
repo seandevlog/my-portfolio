@@ -1,13 +1,39 @@
+type StatusColors = "green" | "orange" | "blue" | "red";
+
 type StatusProps = {
   children: string;
-  color: string;
-}
+  color: StatusColors;
+};
+
+const colorTranslate = (color: StatusColors): string => {
+  switch (color) {
+    case "orange":
+      return "#f97316";
+    case "green":
+      return "#10b981";
+    case "blue":
+      return "#1841ff";
+    case "red":
+      return "#ff2d00";
+  }
+};
 
 export default function Status({ children, color }: StatusProps) {
+  const statusColor = colorTranslate(color);
+
   return (
-    <div className="w-fit h-fit flex items-center gap-[10px] py-[4px] px-[12px] bg-[#ffffff05] border border-[#ffffff10] rounded-[12px]">
-      <span className={`w-[10px] h-[10px] rounded-full ${color} shadow-[0_0_12px_rgba(249,115,22,0.8)] animate-pulse`}/>
-      <p className="text-[12px] font-[400] font-jetbrains text-secondary-lightest">{children.toUpperCase()}</p>
+    <div className="flex h-fit w-fit items-center gap-[10px] rounded-[12px] border border-[#ffffff10] bg-[#ffffff05] px-[12px] py-[4px]">
+      <span
+        style={{
+          backgroundColor: statusColor,
+          boxShadow: `0 0 12px ${statusColor}`,
+        }}
+        className="h-[10px] w-[10px] animate-pulse rounded-full"
+      />
+
+      <p className="font-jetbrains text-[12px] font-[400] text-secondary-lightest">
+        {children.toUpperCase()}
+      </p>
     </div>
   )
 }

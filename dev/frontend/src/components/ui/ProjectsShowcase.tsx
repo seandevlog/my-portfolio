@@ -2,10 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import Projects from "@/data/projects";
+import type Project from "@/types/projects";
 import ProjectsSection from "../ui/ProjectsSection";
 
-export default function ProjectsShowcase() {
+type ProjectsShowcaseProps = {
+  projects: Project[];
+}
+
+export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const phantomRef = useRef<HTMLElement | null>(null);
 
@@ -19,9 +23,9 @@ export default function ProjectsShowcase() {
 
   const activeProjectItem = useMemo(() => {
     return (
-      Projects.find((project) => project.title === activeProject) ?? Projects[0]
+      projects.find((project) => project.title === activeProject) ?? projects[0]
     );
-  }, [activeProject]);
+  }, [activeProject, projects]);
 
   useEffect(() => {
     const updatePreview = () => {
@@ -63,7 +67,7 @@ export default function ProjectsShowcase() {
         className="grid w-full gap-[40px] m:grid-cols-[minmax(0,1fr)_220px] l:grid-cols-[minmax(0,1fr)_250px]"
       >
         <ProjectsSection
-          projects={Projects}
+          projects={projects}
           activeProject={activeProject}
           setActiveProject={setActiveProject}
         />
