@@ -8,21 +8,30 @@ type ProjectsListProps = {
   projects: Project[];
   activeProject: string | null;
   setActiveProject: Dispatch<SetStateAction<string | null>>;
+  isAutoActivationLocked: boolean;
+  activateProjectAfterScroll: (
+    projectTitle: string,
+    getTargetScrollY: () => number | null
+  ) => void;
 };
 
 export default function ProjectsList({
   projects,
   activeProject,
   setActiveProject,
+  isAutoActivationLocked,
+  activateProjectAfterScroll,
 }: ProjectsListProps) {
   return (
-    <div className="flex h-fit w-full flex-col gap-[16px] pl-[20px] m:w-[calc(100%-290px)]">
+    <div className="flex h-fit w-full flex-col gap-[16px] pl-[20px] m:gap-[38px]">
       {projects.map((project, index, array) => (
         <React.Fragment key={project.title}>
           <ProjectItem
             project={project}
             isActive={activeProject === project.title}
             setActiveProject={setActiveProject}
+            isAutoActivationLocked={isAutoActivationLocked}
+            activateProjectAfterScroll={activateProjectAfterScroll}
           />
 
           {index < array.length - 1 && (

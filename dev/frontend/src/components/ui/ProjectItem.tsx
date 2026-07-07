@@ -16,12 +16,19 @@ type ProjectItemProps = {
   project: ProjectType;
   isActive: boolean;
   setActiveProject: Dispatch<SetStateAction<string | null>>;
+  isAutoActivationLocked: boolean;
+  activateProjectAfterScroll: (
+    projectTitle: string,
+    getTargetScrollY: () => number | null
+  ) => void;
 };
 
 export default function ProjectItem({
   project,
   isActive,
   setActiveProject,
+  isAutoActivationLocked,
+  activateProjectAfterScroll,
 }: ProjectItemProps) {
   const itemRef = useRef<HTMLDivElement | null>(null);
   const stackRef = useRef<HTMLSpanElement | null>(null);
@@ -59,7 +66,7 @@ export default function ProjectItem({
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && !isAutoActivationLocked) {
           setActiveProject(project.title);
         }
       },
@@ -73,18 +80,18 @@ export default function ProjectItem({
     observer.observe(titleRef.current);
 
     return () => observer.disconnect();
-  }, [project.title, setActiveProject]);
+  }, [project.title, setActiveProject, isAutoActivationLocked]);
 
   useLayoutEffect(() => {
     if (!itemRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        /**
-         * Close only when the active item is almost gone,
-         * not just because it left the center.
-         */
-        if (isActive && entry.intersectionRatio < 0.08) {
+        if (
+          !isAutoActivationLocked &&
+          isActive &&
+          entry.intersectionRatio < 0.08
+        ) {
           setActiveProject((current) =>
             current === project.title ? null : current
           );
@@ -99,28 +106,20 @@ export default function ProjectItem({
     observer.observe(itemRef.current);
 
     return () => observer.disconnect();
-  }, [isActive, project.title, setActiveProject]);
+  }, [isActive, project.title, setActiveProject, isAutoActivationLocked]);
 
   const scrollProjectToCenter = () => {
     if (!itemRef.current || isActive) return;
 
-    const itemTop = itemRef.current.getBoundingClientRect().top + window.scrollY;
+    activateProjectAfterScroll(project.title, () => {
+      if (!itemRef.current) return null;
 
-    /**
-     * When expanded, the title sits below the stack.
-     * So we scroll based on the title's expanded position,
-     * not the collapsed position.
-     */
-    const expandedTitleCenter =
-      itemTop + sizes.stack + GAP + sizes.title / 2;
+      const itemTop =
+        itemRef.current.getBoundingClientRect().top + window.scrollY;
 
-    const targetScrollY = expandedTitleCenter - window.innerHeight / 2;
+      const expandedTitleCenter = itemTop + sizes.stack + GAP + sizes.title / 2;
 
-    setActiveProject(project.title);
-
-    window.scrollTo({
-      top: targetScrollY,
-      behavior: "smooth",
+      return expandedTitleCenter - window.innerHeight / 2;
     });
   };
 
