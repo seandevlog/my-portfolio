@@ -4,8 +4,8 @@ import Cookie from "../ui/Cookie";
 
 export default function HomeSkills() {
   return (
-    <section className="w-full flex flex-col items-center justify-center gap-[40px] px-section-x-xs s:px-section-x-s m:px-section-x-m l:px-section-x-l py-section-y-xs s:py-section-y-s m:py-section-y-m l:py-section-y-l xl:py-section-y-xl">
-      <div className="flex w-full flex-col gap-[40px] min-w-section-minw-xs s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l">
+    <section className="flex w-full flex-col items-center justify-center gap-[40px] px-section-x-xs py-section-y-xs s:px-section-x-s s:py-section-y-s m:px-section-x-m m:py-section-y-m l:px-section-x-l l:py-section-y-l xl:py-section-y-xl">
+      <div className="flex w-full min-w-section-minw-xs flex-col gap-[40px] s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l">
         <div className="flex h-fit w-full flex-col gap-[12px]">
           <Status color="orange">system_status: skills</Status>
 
@@ -13,31 +13,33 @@ export default function HomeSkills() {
             Business Systems
           </h2>
 
-          <p className="w-full max-w-[400px] s:max-w-[440px] m:max-w-[490px] l:max-w-[560px] text-secondary-lightest text-p1-xs s:text-p1-s m:text-p1-m l:text-p1-l xl:text-p2-xl">Technologies I use to build secure APIs, structured data flows, and maintainable full-stack systems</p>
+          <p className="w-full max-w-[400px] text-p1-xs text-secondary-lightest s:max-w-[440px] s:text-p1-s m:max-w-[490px] m:text-p1-m l:max-w-[560px] l:text-p1-l xl:text-p1-xl">
+            Technologies I use to build secure APIs, structured data flows, and
+            maintainable full-stack systems
+          </p>
         </div>
 
-        <div className="w-full min-w-section-minw-xs s:min-w-section-x-s m:min-w-section-minw-m l:min-w-section-minw-l flex flex-col m:grid m:grid-cols-3 pl-[20px] gap-y-[40px] gap-x-[32px]">
-          {Skills.map((skill, index) => {
+        <div className="flex w-full min-w-section-minw-xs flex-col gap-x-[32px] gap-y-[40px] pl-[20px] s:min-w-section-minw-s m:grid m:min-w-section-minw-m m:grid-cols-3 l:min-w-section-minw-l">
+          {Skills.map((skill) => {
             return (
-              <div key={index} className="w-full flex flex-col gap-[20px] divide-y divide-accent-light/70">
-                <span className="w-full flex flex-col pb-[4px] text-p2-xs s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl uppercase font-jetbrains text-secondary-lightest">
+              <div
+                key={skill.category}
+                className="flex w-full flex-col gap-[20px] divide-y divide-accent-light/70"
+              >
+                <div className="flex w-full flex-col pb-[4px] font-mono text-p2-xs uppercase text-secondary-lightest s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl">
                   <p>{skill.category}</p>
-                </span>
-                <div className="w-full flex flex-wrap gap-y-[10px] gap-x-[15px]">
-                  {skill.names.map((item, index) => (
-                    <Cookie 
-                      key={index}
-                      mode="dark"
-                    >
-                      <p className="text-p2-xs s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl">{item}</p>
-                    </Cookie>
+                </div>
+
+                <div className="flex w-full flex-wrap gap-x-[15px] gap-y-[10px]">
+                  {skill.names.map((item) => (
+                    <Cookie key={item} mode="dark" text={item} />
                   ))}
                 </div>
               </div>
-            )
+            );
           })}
         </div>
       </div>
     </section>
-  )
+  );
 }
