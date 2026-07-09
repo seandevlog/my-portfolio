@@ -1,6 +1,6 @@
 import { X } from "lucide-react";
 import Status from "../ui/Status";
-import ButtonPrimary from "../ui/ButtonPrimary";
+import Button from "../ui/Button";
 
 export default function HomeHero() {
   return (
@@ -13,7 +13,7 @@ export default function HomeHero() {
       <span className="w-full s:w-[530px] m:w-[700px] xl:w-[800px] max-w-[320px] s:max-w-none text-p1-xs s:text-p1-s m:text-p1-m l:text-p1-l xl:text-p1-xl text-center text-pretty text-secondary-lightest">
         <p>I turn practical ideas into secure web platforms, connecting clean APIs, reliable data flows, and thoughtful interfaces into systems people can trust.</p>
       </span>
-      <ButtonPrimary>view_systems</ButtonPrimary>
+      <Button mode="primary">view_systems</Button>
     </section>
   )
 }
