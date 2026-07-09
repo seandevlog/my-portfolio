@@ -1,3 +1,4 @@
+import HomeAbout from "@/components/home/HomeAbout";
 import HomeExperience from "@/components/home/HomeExperience";
 import HomeHero from "@/components/home/HomeHero";
 import HomeProjects from "@/components/home/HomeProjects";
@@ -12,6 +13,7 @@ export default function Home() {
       <HomeProjects/>
       <HomeExperience/>
       <HomeSkills/>
+      <HomeAbout/>
     </>
   );
 }
