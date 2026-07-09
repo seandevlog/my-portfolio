@@ -6,7 +6,10 @@ import { FileText } from "lucide-react";
 
 export default function HomeContact() {
   return (
-    <section className="w-full flex flex-col items-center justify-center gap-[80px] px-section-x-xs s:px-section-x-s m:px-section-x-m l:px-section-x-l py-section-x-xs s:py-section-x-s m:py-section-y-m l:py-section-y-l xl:py-section-y-xl">
+    <section
+      id="contact" 
+      className="w-full min-h-dvh flex flex-col items-center justify-between gap-[20px] px-section-x-xs s:px-section-x-s m:px-section-x-m l:px-section-x-l py-section-x-xs s:py-section-x-s m:py-section-y-m l:py-section-y-l xl:py-section-y-xl"
+    >
       <div className="w-full min-w-section-minw-xs s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l flex flex-col items-center m:items-start gap-[24px]">
         <Status color="red">contact_endpoint</Status>
 
