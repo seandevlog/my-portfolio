@@ -10,8 +10,6 @@ import {
 } from "react";
 import type ProjectType from "@/types/projects";
 
-const GAP = 5;
-
 type ProjectItemProps = {
   project: ProjectType;
   isActive: boolean;
@@ -31,6 +29,7 @@ export default function ProjectItem({
   activateProjectAfterScroll,
 }: ProjectItemProps) {
   const itemRef = useRef<HTMLDivElement | null>(null);
+  const contentInnerRef = useRef<HTMLDivElement | null>(null);
   const stackRef = useRef<HTMLSpanElement | null>(null);
   const titleRef = useRef<HTMLHeadingElement | null>(null);
   const descriptionRef = useRef<HTMLParagraphElement | null>(null);
@@ -39,14 +38,20 @@ export default function ProjectItem({
     stack: 0,
     title: 0,
     description: 0,
+    gap: 5,
   });
 
   useLayoutEffect(() => {
     const updateSizes = () => {
+      const computedGap = contentInnerRef.current
+        ? parseFloat(window.getComputedStyle(contentInnerRef.current).rowGap)
+        : 5;
+
       setSizes({
         stack: stackRef.current?.offsetHeight ?? 0,
         title: titleRef.current?.offsetHeight ?? 0,
         description: descriptionRef.current?.offsetHeight ?? 0,
+        gap: Number.isNaN(computedGap) ? 5 : computedGap,
       });
     };
 
@@ -54,11 +59,17 @@ export default function ProjectItem({
 
     const resizeObserver = new ResizeObserver(updateSizes);
 
+    if (contentInnerRef.current) resizeObserver.observe(contentInnerRef.current);
     if (stackRef.current) resizeObserver.observe(stackRef.current);
     if (titleRef.current) resizeObserver.observe(titleRef.current);
     if (descriptionRef.current) resizeObserver.observe(descriptionRef.current);
 
-    return () => resizeObserver.disconnect();
+    window.addEventListener("resize", updateSizes);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateSizes);
+    };
   }, [project]);
 
   useLayoutEffect(() => {
@@ -117,7 +128,8 @@ export default function ProjectItem({
       const itemTop =
         itemRef.current.getBoundingClientRect().top + window.scrollY;
 
-      const expandedTitleCenter = itemTop + sizes.stack + GAP + sizes.title / 2;
+      const expandedTitleCenter =
+        itemTop + sizes.stack + sizes.gap + sizes.title / 2;
 
       return expandedTitleCenter - window.innerHeight / 2;
     });
@@ -133,7 +145,8 @@ export default function ProjectItem({
   const isMeasured = sizes.title > 0;
 
   const collapsedHeight = sizes.title;
-  const expandedHeight = sizes.stack + sizes.title + sizes.description + GAP * 2;
+  const expandedHeight =
+    sizes.stack + sizes.title + sizes.description + sizes.gap * 2;
 
   return (
     <div
@@ -155,20 +168,26 @@ export default function ProjectItem({
       `}
     >
       <div
+        ref={contentInnerRef}
         style={{
           transform:
             isMeasured && !isActive
-              ? `translateY(-${sizes.stack + GAP}px)`
+              ? `translateY(-${sizes.stack + sizes.gap}px)`
               : "translateY(0px)",
         }}
-        className="flex w-full flex-col items-start gap-[5px] transition-transform duration-700 ease-out"
+        className="
+          flex w-full flex-col items-start
+          gap-[clamp(4px,0.8vmin,6px)]
+          transition-transform duration-700 ease-out
+        "
       >
         <span
           ref={stackRef}
           className={`
-            w-fit font-jetbrains text-p2-xs uppercase text-secondary-lightest
+            w-fit font-jetbrains uppercase text-secondary-lightest
+            text-[clamp(11px,1.35vmin,16px)]
+            leading-[1.2]
             transition-opacity duration-700 ease-out
-            s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl
             ${isActive ? "opacity-70" : "opacity-0"}
           `}
         >
@@ -177,7 +196,11 @@ export default function ProjectItem({
 
         <h3
           ref={titleRef}
-          className="w-fit text-left text-h3-xs font-semibold text-accent-light s:text-h3-s m:text-h3-m l:text-h3-l"
+          className="
+            w-fit text-left font-semibold text-accent-light
+            text-[clamp(16px,3.2vmin,30px)]
+            leading-[1.1]
+          "
         >
           {project.title}
         </h3>
@@ -185,9 +208,10 @@ export default function ProjectItem({
         <p
           ref={descriptionRef}
           className={`
-            w-full text-left text-p1-xs text-secondary-lightest
+            w-full text-left text-secondary-lightest
+            text-[clamp(14px,2vmin,22px)]
+            leading-[1.4]
             transition-opacity duration-700 ease-out
-            s:text-p1-s m:text-p1-m l:text-p1-l xl:text-p1-xl
             ${isActive ? "opacity-100" : "opacity-0"}
           `}
         >

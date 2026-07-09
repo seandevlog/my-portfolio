@@ -10,8 +10,6 @@ type ProjectsShowcaseProps = {
 };
 
 const EXPAND_DELAY_MS = 100;
-
-// This should be slightly longer than ProjectItem's duration-700 height transition.
 const COLLAPSE_DELAY_MS = 500;
 
 export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
@@ -131,7 +129,13 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
     <>
       <div
         ref={contentRef}
-        className="grid w-full gap-[40px] m:grid-cols-[minmax(0,1fr)_220px] l:grid-cols-[minmax(0,1fr)_250px] xl:grid-cols-[minmax(0,1fr)_340px]"
+        className="
+          grid w-full
+          gap-[clamp(28px,4vmin,40px)]
+          m:grid-cols-[minmax(0,1fr)_clamp(220px,28vw,260px)]
+          l:grid-cols-[minmax(0,1fr)_clamp(250px,28vw,300px)]
+          xl:grid-cols-[minmax(0,1fr)_clamp(300px,28vw,340px)]
+        "
       >
         <ProjectsList
           projects={projects}
@@ -144,7 +148,13 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
         <aside
           ref={phantomRef}
           aria-hidden="true"
-          className="hidden h-full w-[220px] shrink-0 m:block l:w-[250px] xl:w-[340px]"
+          className="
+            hidden h-full shrink-0
+            w-[clamp(220px,28vw,260px)]
+            m:block
+            l:w-[clamp(250px,28vw,300px)]
+            xl:w-[clamp(300px,28vw,340px)]
+          "
         />
       </div>
 
@@ -156,7 +166,7 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
           }}
           className={`
             pointer-events-none fixed top-1/2 z-30 hidden
-            -translate-y-1/2 flex-col gap-[10px]
+            -translate-y-1/2 flex-col gap-[clamp(8px,1.5vmin,10px)]
             transition-all duration-500 ease-out
             m:flex
             ${
@@ -166,14 +176,27 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
             }
           `}
         >
-          <p className="font-jetbrains text-[12px] uppercase text-secondary-lightest/70">
+          <p
+            className="
+              font-jetbrains uppercase text-secondary-lightest/70
+              text-[clamp(11px,1.3vmin,12px)]
+            "
+          >
             {activeProjectItem.date.toLocaleDateString("en-CA", {
               month: "2-digit",
               year: "numeric",
             })}
           </p>
 
-          <div className="relative h-[180px] w-full overflow-hidden rounded-[8px] border border-accent-light/20 bg-primary-light l:h-[200px] xl:h-[260px]">
+          <div
+            className="
+              relative w-full overflow-hidden rounded-[8px]
+              border border-accent-light/20 bg-primary-light
+              h-[clamp(160px,24vmin,180px)]
+              l:h-[clamp(180px,24vmin,220px)]
+              xl:h-[clamp(220px,24vmin,260px)]
+            "
+          >
             <Image
               src={activeProjectItem.screenshots[0].coverImage.src}
               alt={activeProjectItem.screenshots[0].coverImage.alt}

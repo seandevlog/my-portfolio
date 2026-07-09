@@ -7,37 +7,74 @@ import { FileText } from "lucide-react";
 export default function HomeContact() {
   return (
     <section
-      id="contact" 
-      className="w-full min-h-dvh flex flex-col items-center justify-between gap-[20px] px-section-x-xs s:px-section-x-s m:px-section-x-m l:px-section-x-l py-section-x-xs s:py-section-x-s m:py-section-y-m l:py-section-y-l xl:py-section-y-xl"
+      id="contact"
+      className="
+        flex h-dvh w-full flex-col items-center justify-center overflow-hidden
+        px-section-x-xs py-section-y-xs
+        s:px-section-x-s s:py-section-y-s
+        m:px-section-x-m m:py-section-y-m
+        l:px-section-x-l l:py-section-y-l
+        xl:py-section-y-xl
+      "
     >
-      <div className="w-full min-w-section-minw-xs s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l flex flex-col items-center m:items-start gap-[24px]">
-        <Status color="red">contact_endpoint</Status>
+      <div
+        className="
+          grid h-full w-full min-w-section-minw-xs grid-rows-[auto_minmax(0,1fr)_auto]
+          gap-[clamp(16px,4vmin,48px)]
+          s:min-w-section-minw-s
+          m:min-w-section-minw-m
+          l:min-w-section-minw-l
+        "
+      >
+        <div className="flex min-h-0 w-full flex-col items-center gap-[clamp(12px,2.5vmin,24px)] m:items-start">
+          <Status color="red">contact_endpoint</Status>
 
-        <h2 className="text-center m:text-left w-full m:w-[550px] xl:w-[600px] capitalize text-accent-light text-[56px] s:text-[62px] m:text-[68px] l:text-[74px] xl:text-[80px]">Let’s build reliable systems</h2>
-      </div>
+          <h2
+            className="
+              w-full max-w-[600px] text-center capitalize leading-[0.92]
+              text-accent-light
+              text-[clamp(40px,8vmin,80px)]
+              m:text-left
+            "
+          >
+            Let&apos;s build reliable systems
+          </h2>
+        </div>
 
-      <div className="w-full min-w-section-minw-xs s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l flex flex-col m:items-end gap-[39px]">
-        <p className="w-full m:w-[500px] text-center m:text-right font-outfit text-secondary-lightest text-p1-xs s:text-p1-s m:text-p1-m l:text-p1-l xl:text-p1-xl">Looking for junior full-stack or backend developer opportunities where I can contribute to secure, reliable, and maintainable web applications for real business and operational needs.</p>
-        <p className="w-full m:w-[500px] text-center m:text-right font-outfit text-secondary-lightest text-p1-xs s:text-p1-s m:text-p1-m l:text-p1-l xl:text-p1-xl">I&apos;m also available for freelance web development projects, including responsive websites, REST APIs, admin dashboards, internal tools, and maintenance support.</p>
-      </div>
+        <div className="flex min-h-0 w-full flex-col justify-center gap-[clamp(16px,3vmin,36px)] m:items-end">
+          <p className="w-full max-w-[500px] text-center font-outfit text-[clamp(14px,2vmin,22px)] leading-[1.35] text-secondary-lightest m:text-right">
+            Looking for junior full-stack or backend developer opportunities
+            where I can contribute to secure, reliable, and maintainable web
+            applications for real business and operational needs.
+          </p>
 
-      <div className="w-full min-w-section-minw-xs s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l flex flex-col items-center m:items-start gap-[20px]">
-        <Button mode="primary">
-          <p className="uppercase">email_me</p>
-        </Button>
+          <p className="w-full max-w-[500px] text-center font-outfit text-[clamp(14px,2vmin,22px)] leading-[1.35] text-secondary-lightest m:text-right">
+            I&apos;m also available for freelance web development projects,
+            including responsive websites, REST APIs, admin dashboards, internal
+            tools, and maintenance support.
+          </p>
+        </div>
 
-        <div className="flex items-center gap-x-[18px] gap-y-[10px]">
-          <Button mode="secondary">
-            <GitHubIcon className="w-[25px] h-[25px]"/>
+        <div className="flex min-h-0 w-full flex-col items-center gap-[clamp(12px,2.5vmin,20px)] m:items-start">
+          <Button mode="primary">
+            <p className="uppercase">email_me</p>
           </Button>
-          <Button mode="secondary">
-            <LinkedInIcon className="w-[25px] h-[25px]"/>
-          </Button>
-          <Button mode="secondary">
-            <FileText className="w-[25px] h-[25px]"/>
-          </Button>
+
+          <div className="flex items-center gap-x-[18px] gap-y-[10px]">
+            <Button mode="secondary">
+              <GitHubIcon className="h-[25px] w-[25px]" />
+            </Button>
+
+            <Button mode="secondary">
+              <LinkedInIcon className="h-[25px] w-[25px]" />
+            </Button>
+
+            <Button mode="secondary">
+              <FileText className="h-[25px] w-[25px]" />
+            </Button>
+          </div>
         </div>
       </div>
     </section>
-  )
+  );
 }

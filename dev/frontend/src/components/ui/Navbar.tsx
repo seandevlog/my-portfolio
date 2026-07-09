@@ -29,7 +29,9 @@ export default function Navbar() {
     <header
       className={`
         sticky top-0 z-[100] flex h-fit w-full items-center justify-center
-        border border-[#ffffff10] bg-black-base px-[24px] py-[15px]
+        border border-[#ffffff10] bg-black-base
+        px-[clamp(16px,4vw,24px)]
+        py-[clamp(10px,2vmin,15px)]
         transition-all duration-500 ease-out
         ${
           isContactVisible
@@ -38,16 +40,46 @@ export default function Navbar() {
         }
       `}
     >
-      <div className="flex h-fit w-full min-w-section-minw-xs flex-wrap justify-between gap-x-[20px] gap-y-[15px]">
-        <div className="flex h-fit w-fit items-center gap-[5px]">
-          <SquareTerminal className="h-[20px] w-[20px] stroke-secondary-lighter" />
+      <div
+        className="
+          flex h-fit w-full min-w-section-minw-xs flex-wrap justify-between items-center
+          gap-x-[clamp(14px,3vw,20px)]
+          gap-y-[clamp(14px,2vmin,15px)]
+          s:min-w-section-minw-s
+          m:min-w-section-minw-m
+          l:min-w-section-minw-l
+        "
+      >
+        <div className="flex h-fit w-fit items-center gap-[clamp(5px,1vmin,8px)]">
+          <SquareTerminal
+            className="
+              shrink-0 stroke-secondary-lighter
+              h-[clamp(18px,2.5vmin,22px)]
+              w-[clamp(18px,2.5vmin,22px)]
+            "
+          />
 
-          <p className="font-jetbrains text-[16px] uppercase tracking-tighter text-secondary-lighter">
+          <p
+            className="
+              font-jetbrains uppercase tracking-tighter text-secondary-lighter
+              text-[clamp(13px,2vmin,16px)]
+              leading-none
+            "
+          >
             sean_delos_santos_os
           </p>
         </div>
 
-        <ul className="flex h-fit w-full basis-full list-none items-center justify-between text-[14px] text-secondary-lighter s:w-fit s:basis-auto s:justify-start s:gap-[18px]">
+        <ul
+          className="
+            flex h-fit w-full basis-full list-none items-center justify-between
+            text-secondary-lighter
+            text-[clamp(12px,1.8vmin,14px)]
+            leading-none
+            s:w-fit s:basis-auto s:justify-start
+            s:gap-[clamp(14px,3vw,18px)]
+          "
+        >
           <li>GitHub</li>
           <li>LinkedIn</li>
           <li>Resume</li>

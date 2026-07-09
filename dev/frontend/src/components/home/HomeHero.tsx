@@ -4,28 +4,59 @@ import Button from "../ui/Button";
 
 export default function HomeHero() {
   return (
-    <section className="flex h-dvh w-full flex-col items-center justify-center gap-[24px] px-section-x-xs">
+    <section
+      className="
+        flex h-dvh w-full flex-col items-center justify-center overflow-hidden
+        gap-[clamp(18px,3vmin,28px)]
+        px-section-x-xs py-section-y-xs
+        s:px-section-x-s
+        m:px-section-x-m
+        l:px-section-x-l
+      "
+    >
       <Status color="green">system_status: active</Status>
 
-      <span className="w-full max-w-[360px] justify-center text-center text-h1-xs uppercase s:w-[550px] s:max-w-none s:text-h1-s m:w-[768px] m:text-h1-m l:w-[959px] l:text-h1-l">
-        <p className="inline-flex items-center gap-2 text-secondary-lighter">
+      <div
+        className="
+          flex w-full max-w-[960px] flex-col items-center
+          gap-y-[clamp(10px,1.8vmin,20px)]
+          text-center uppercase
+          text-[clamp(28px,8.5vmin,70px)]
+          leading-[0.95]
+        "
+      >
+        <p className="inline-flex items-center justify-center gap-[clamp(8px,1.5vmin,12px)] text-secondary-lighter">
           backend{" "}
-          <X className="h-[20px] w-[20px] s:h-[28px] s:w-[28px] m:h-[48px] m:w-[48px]" />{" "}
+          <X
+            className="
+              h-[clamp(20px,5.5vmin,48px)]
+              w-[clamp(20px,5.5vmin,48px)]
+              shrink-0
+            "
+          />{" "}
           data
         </p>
 
-        <p className="text-secondary-lightest">
-          for secure, structured systems
+        <p className="max-w-[980px] text-balance text-secondary-lightest">
+          for secure,{" "}
+          <span className="whitespace-nowrap">structured systems</span>
         </p>
-      </span>
+      </div>
 
-      <span className="w-full max-w-[320px] text-pretty text-center text-p1-xs text-secondary-lightest s:w-[530px] s:max-w-none s:text-p1-s m:w-[700px] m:text-p1-m l:text-p1-l xl:w-[800px] xl:text-p1-xl">
+      <div
+        className="
+          w-full max-w-[min(800px,90vw)]
+          text-pretty text-center text-secondary-lightest
+          text-[clamp(14px,2vmin,22px)]
+          leading-[1.4]
+        "
+      >
         <p>
           I turn practical ideas into secure web platforms, connecting clean
           APIs, reliable data flows, and thoughtful interfaces into systems
           people can trust.
         </p>
-      </span>
+      </div>
 
       <a href="#projects" aria-label="Scroll to projects section">
         <Button mode="primary">view_systems</Button>

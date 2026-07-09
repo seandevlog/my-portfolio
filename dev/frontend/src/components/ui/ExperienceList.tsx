@@ -40,7 +40,6 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
         ([categoryName]) => categoryName.toLowerCase() === DEFAULT_CATEGORY
       );
 
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOpenCategory(
         defaultCategory
           ? defaultCategory[0].toLowerCase()
@@ -50,7 +49,16 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
   }, [categoryMap, openCategory]);
 
   return (
-    <div className="flex h-fit w-full min-w-section-minw-xs flex-col gap-[28px] pl-[20px] s:min-w-section-minw-s m:min-w-section-minw-m l:min-w-section-minw-l">
+    <div
+      className="
+        flex h-fit w-full min-w-section-minw-xs flex-col
+        gap-[clamp(20px,4vmin,28px)]
+        pl-[20px]
+        s:min-w-section-minw-s
+        m:min-w-section-minw-m
+        l:min-w-section-minw-l
+      "
+    >
       {categoryMap.map(([categoryName, count]) => {
         const categoryKey = categoryName.toLowerCase();
         const isOpen = openCategory === categoryKey;
@@ -62,28 +70,55 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
         return (
           <div
             key={categoryName}
-            className="flex h-fit w-full flex-col gap-[20px]"
+            className="flex h-fit w-full flex-col gap-[clamp(14px,3vmin,20px)]"
           >
             <button
               type="button"
               aria-expanded={isOpen}
               onClick={() => setOpenCategory(categoryKey)}
-              className="flex h-fit w-full items-center justify-between text-left cursor-pointer"
+              className="flex h-fit w-full cursor-pointer items-center justify-between text-left"
             >
-              <span className="flex h-fit w-fit items-center gap-[20px] font-jetbrains text-secondary-lightest">
-                <span className="text-p1-xs font-semibold uppercase s:text-p1-s m:text-p1-m l:text-p1-l xl:text-p1-xl">
+              <span
+                className="
+                  flex h-fit w-fit items-center
+                  gap-[clamp(12px,3vmin,20px)]
+                  font-jetbrains text-secondary-lightest
+                "
+              >
+                <span
+                  className="
+                    font-semibold uppercase
+                    text-[clamp(14px,2vmin,22px)]
+                    leading-none
+                  "
+                >
                   {categoryName}
                 </span>
 
-                <span className="text-p2-xs opacity-70 s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl">
+                <span
+                  className="
+                    opacity-70
+                    text-[clamp(11px,1.5vmin,16px)]
+                    leading-none
+                  "
+                >
                   ({count})
                 </span>
               </span>
 
-              <span className="relative flex h-5 w-5 items-center justify-center text-secondary-lightest/70">
+              <span
+                className="
+                  relative flex items-center justify-center
+                  text-secondary-lightest/70
+                  h-[clamp(18px,2.5vmin,24px)]
+                  w-[clamp(18px,2.5vmin,24px)]
+                "
+              >
                 <Plus
                   className={`
-                    absolute h-5 w-5 transition-all duration-300 ease-out
+                    absolute transition-all duration-300 ease-out
+                    h-[clamp(18px,2.5vmin,24px)]
+                    w-[clamp(18px,2.5vmin,24px)]
                     ${
                       isOpen
                         ? "rotate-90 scale-75 opacity-0"
@@ -94,7 +129,9 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
 
                 <Minus
                   className={`
-                    absolute h-5 w-5 transition-all duration-300 ease-out
+                    absolute transition-all duration-300 ease-out
+                    h-[clamp(18px,2.5vmin,24px)]
+                    w-[clamp(18px,2.5vmin,24px)]
                     ${
                       isOpen
                         ? "rotate-0 scale-100 opacity-100"
@@ -108,13 +145,19 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
             <div
               className={`
                 grid transition-[grid-template-rows,opacity] duration-500 ease-out
-                ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}
+                ${
+                  isOpen
+                    ? "grid-rows-[1fr] opacity-100"
+                    : "grid-rows-[0fr] opacity-0"
+                }
               `}
             >
               <div className="min-h-0 overflow-hidden">
                 <div
                   className={`
-                    flex w-full flex-col gap-[20px] pl-[10px] pr-[30px]
+                    flex w-full flex-col
+                    gap-[clamp(16px,3vmin,20px)]
+                    pl-[10px] pr-[clamp(16px,4vmin,30px)]
                     transition-transform duration-500 ease-out
                     ${isOpen ? "translate-y-0" : "-translate-y-3"}
                   `}
@@ -123,22 +166,51 @@ export default function ExperienceList({ experiences }: ExperienceListProps) {
                     <React.Fragment
                       key={`${experience.company}-${experience.role}-${experience.timeline}`}
                     >
-                      <div className="flex w-full flex-col gap-[8px]">
-                        <div className="flex w-full flex-col">
-                          <p className="font-jetbrains text-p2-xs uppercase tracking-tighter text-secondary-lightest/60 s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl">
+                      <div
+                        className="
+                          flex w-full flex-col
+                          gap-[clamp(8px,2vmin,12px)]
+                        "
+                      >
+                        <div className="flex w-full flex-col gap-[2px]">
+                          <p
+                            className="
+                              font-jetbrains uppercase tracking-tighter text-secondary-lightest/60
+                              text-[clamp(11px,1.5vmin,16px)]
+                              leading-[1.2]
+                            "
+                          >
                             {experience.timeline}
                           </p>
 
-                          <p className="font-jetbrains text-p2-xs uppercase tracking-tighter text-secondary-lightest s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl">
+                          <p
+                            className="
+                              font-jetbrains uppercase tracking-tighter text-secondary-lightest
+                              text-[clamp(11px,1.5vmin,16px)]
+                              leading-[1.2]
+                            "
+                          >
                             {experience.company}
                           </p>
                         </div>
 
-                        <h3 className="text-h3-xs font-semibold text-accent-light s:text-h3-s m:text-h3-m l:text-h3-l">
+                        <h3
+                          className="
+                            font-semibold text-accent-light
+                            text-[clamp(16px,3vmin,30px)]
+                            leading-[1.1]
+                          "
+                        >
                           {experience.role}
                         </h3>
 
-                        <p className="text-p1-xs leading-relaxed text-secondary-lightest s:text-p1-s m:text-p1-m l:text-p1-l xl:text-p1-xl">
+                        <p
+                          className="
+                            text-secondary-lightest
+                            text-[clamp(14px,2vmin,22px)]
+                            leading-relaxed
+                          "
+                        >
                           {experience.description}
                         </p>
                       </div>

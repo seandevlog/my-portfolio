@@ -8,6 +8,7 @@ type CookieProps = {
 };
 
 const BYTE_CHARS = ["0", "1"];
+const REVEAL_SPEED_MS = 90;
 
 function getDeterministicByte(index: number) {
   return index % 2 === 0 ? "0" : "1";
@@ -69,7 +70,7 @@ export default function Cookie({ text, mode }: CookieProps) {
               window.clearInterval(interval);
             }
           }
-        }, 60);
+        }, REVEAL_SPEED_MS);
       },
       {
         threshold: 0.1,
@@ -94,11 +95,20 @@ export default function Cookie({ text, mode }: CookieProps) {
   return (
     <div
       ref={cookieRef}
+      aria-label={text}
       style={{
         background,
         color,
       }}
-      className="flex items-center justify-center rounded-[4px] border border-[#ffffff]/10 p-[8px] font-mono text-p2-xs s:text-p2-s m:text-p2-m l:text-p2-l xl:text-p2-xl"
+      className="
+        flex items-center justify-center whitespace-nowrap rounded-[clamp(3px,0.7vmin,4px)]
+        border border-[#ffffff]/10
+        px-[clamp(6px,1.2vmin,8px)]
+        py-[clamp(5px,1vmin,8px)]
+        font-mono
+        text-[clamp(10px,1.45vmin,16px)]
+        leading-none
+      "
     >
       {displayText}
     </div>

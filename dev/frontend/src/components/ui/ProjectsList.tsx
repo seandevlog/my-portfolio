@@ -23,7 +23,13 @@ export default function ProjectsList({
   activateProjectAfterScroll,
 }: ProjectsListProps) {
   return (
-    <div className="flex h-fit w-full flex-col gap-[16px] pl-[20px] m:gap-[38px]">
+    <div
+      className="
+        flex h-fit w-full flex-col
+        gap-[clamp(16px,4vmin,38px)]
+        pl-[clamp(12px,2.5vmin,20px)]
+      "
+    >
       {projects.map((project, index, array) => (
         <React.Fragment key={project.title}>
           <ProjectItem
