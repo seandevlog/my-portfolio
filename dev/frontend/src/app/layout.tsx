@@ -9,6 +9,7 @@ import {
 
 import "@mantine/core/styles.css";
 import "./globals.css";
+import GridSparks from "@/components/ui/GridSparks";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -65,8 +66,10 @@ export default function RootLayout({
 
       <body className="min-h-full bg-primary-base font-outfit text-accent-light">
         <MantineProvider theme={theme} defaultColorScheme="light">
-          <div className="min-h-screen bg-primary-base text-accent-light system-grid-bg">
-            {children}
+          <div className="system-grid-bg min-h-dvh bg-primary-base text-accent-light">
+            <GridSparks />
+
+            <div className="relative z-10">{children}</div>
           </div>
         </MantineProvider>
       </body>

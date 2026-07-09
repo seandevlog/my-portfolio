@@ -90,15 +90,161 @@
 
 @layer utilities {
   .system-grid-bg {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+
     background-color: #07152b;
-    background-image: 
-      radial-gradient(circle at 50% 0%, rgba(249, 115, 22, 0.08), transparent 35%),
+    background-image:
+      radial-gradient(
+        circle at 50% 0%,
+        rgba(249, 115, 22, 0.08),
+        transparent 35%
+      ),
       linear-gradient(rgba(183, 199, 232, 0.05) 1px, transparent 1px),
       linear-gradient(90deg, rgba(183, 199, 232, 0.05) 1px, transparent 1px);
-    
-    background-size: 
+
+    background-size:
       100% 100%,
       24px 24px,
       24px 24px;
+  }
+
+  .grid-sparks-random {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+
+  .spark-dot-grid {
+    position: absolute;
+    border-radius: 9999px;
+    pointer-events: none;
+
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(219, 234, 254, 0.8) 35%,
+      rgba(96, 165, 250, 0.45) 65%,
+      rgba(37, 99, 235, 0) 100%
+    );
+
+    box-shadow:
+      0 0 5px rgba(219, 234, 254, 0.55),
+      0 0 12px rgba(96, 165, 250, 0.28),
+      0 0 22px rgba(37, 99, 235, 0.16);
+
+    opacity: 0.72;
+    transition-timing-function: linear;
+    will-change: left, top;
+    animation: subtle-blue-spark-pulse 2.8s ease-in-out infinite;
+  }
+
+  /* subtle glow trail */
+  .spark-dot-grid::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 10px;
+    border-radius: 9999px;
+    pointer-events: none;
+
+    background: radial-gradient(
+      ellipse,
+      rgba(147, 197, 253, 0.28) 0%,
+      rgba(96, 165, 250, 0.16) 45%,
+      transparent 100%
+    );
+
+    filter: blur(4px);
+    opacity: 0.55;
+  }
+
+  /* tiny white-blue core highlight */
+  .spark-dot-grid::after {
+    content: "";
+    position: absolute;
+    width: 10px;
+    height: 4px;
+    border-radius: 9999px;
+    pointer-events: none;
+
+    background: rgba(219, 234, 254, 0.55);
+    filter: blur(1.5px);
+    opacity: 0.45;
+  }
+
+  /* moving right = glow trails behind on the left */
+  .spark-right::before {
+    right: 35%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .spark-right::after {
+    right: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* moving left = glow trails behind on the right */
+  .spark-left::before {
+    left: 35%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .spark-left::after {
+    left: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  /* moving down = glow trails behind above */
+  .spark-down::before {
+    left: 50%;
+    bottom: 35%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .spark-down::after {
+    left: 50%;
+    bottom: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  /* moving up = glow trails behind below */
+  .spark-up::before {
+    left: 50%;
+    top: 35%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .spark-up::after {
+    left: 50%;
+    top: 50%;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  @keyframes subtle-blue-spark-pulse {
+    0%,
+    100% {
+      opacity: 0.45;
+      scale: 0.92;
+    }
+
+    50% {
+      opacity: 0.78;
+      scale: 1;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .spark-dot-grid {
+      transition: none;
+      animation: none;
+    }
   }
 }
