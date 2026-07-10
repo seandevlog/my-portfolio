@@ -5,6 +5,7 @@ import Button from "../ui/Button";
 export default function HomeHero() {
   return (
     <section
+      id="hero"
       className="
         flex h-dvh w-full flex-col items-center justify-center overflow-hidden
         gap-[clamp(18px,3vmin,28px)]
@@ -37,9 +38,8 @@ export default function HomeHero() {
           data
         </p>
 
-        <p className="max-w-[980px] text-balance text-secondary-lightest">
-          for secure,{" "}
-          <span className="whitespace-nowrap">structured systems</span>
+        <p className="max-w-[980px] text-pretty text-secondary-lightest leading-[1.4]">
+          for secure, structured systems
         </p>
       </div>
 

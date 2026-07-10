@@ -8,10 +8,12 @@ import {
   useRef,
   useState,
 } from "react";
+import { useRouter } from "next/navigation";
 import type ProjectType from "@/types/projects";
 
 type ProjectItemProps = {
   project: ProjectType;
+  projectHref: string;
   isActive: boolean;
   setActiveProject: Dispatch<SetStateAction<string | null>>;
   isAutoActivationLocked: boolean;
@@ -23,11 +25,14 @@ type ProjectItemProps = {
 
 export default function ProjectItem({
   project,
+  projectHref,
   isActive,
   setActiveProject,
   isAutoActivationLocked,
   activateProjectAfterScroll,
 }: ProjectItemProps) {
+  const router = useRouter();
+
   const itemRef = useRef<HTMLDivElement | null>(null);
   const contentInnerRef = useRef<HTMLDivElement | null>(null);
   const stackRef = useRef<HTMLSpanElement | null>(null);
@@ -135,11 +140,30 @@ export default function ProjectItem({
     });
   };
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter" || event.key === " ") {
-      event.preventDefault();
-      scrollProjectToCenter();
+  const openProjectPage = () => {
+    router.push(projectHref);
+  };
+
+  const handleClick = () => {
+    if (isActive) {
+      openProjectPage();
+      return;
     }
+
+    scrollProjectToCenter();
+  };
+
+  const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== "Enter" && event.key !== " ") return;
+
+    event.preventDefault();
+
+    if (isActive) {
+      openProjectPage();
+      return;
+    }
+
+    scrollProjectToCenter();
   };
 
   const isMeasured = sizes.title > 0;
@@ -151,9 +175,14 @@ export default function ProjectItem({
   return (
     <div
       ref={itemRef}
-      role="button"
+      role={isActive ? "link" : "button"}
+      aria-label={
+        isActive
+          ? `Open ${project.title} project page`
+          : `Preview ${project.title}`
+      }
       tabIndex={0}
-      onClick={scrollProjectToCenter}
+      onClick={handleClick}
       onKeyDown={handleKeyDown}
       style={{
         height: isMeasured
@@ -164,7 +193,8 @@ export default function ProjectItem({
       }}
       className={`
         relative w-full overflow-hidden transition-[height] duration-700 ease-out
-        ${isActive ? "cursor-default" : "cursor-pointer"}
+        cursor-pointer
+        focus-visible:outline focus-visible:outline-1 focus-visible:outline-secondary-lighter
       `}
     >
       <div

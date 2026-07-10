@@ -13,6 +13,7 @@ type ProjectsListProps = {
     projectTitle: string,
     getTargetScrollY: () => number | null
   ) => void;
+  getProjectHref: (project: Project) => string;
 };
 
 export default function ProjectsList({
@@ -21,6 +22,7 @@ export default function ProjectsList({
   setActiveProject,
   isAutoActivationLocked,
   activateProjectAfterScroll,
+  getProjectHref,
 }: ProjectsListProps) {
   return (
     <div
@@ -34,6 +36,7 @@ export default function ProjectsList({
         <React.Fragment key={project.title}>
           <ProjectItem
             project={project}
+            projectHref={getProjectHref(project)}
             isActive={activeProject === project.title}
             setActiveProject={setActiveProject}
             isAutoActivationLocked={isAutoActivationLocked}

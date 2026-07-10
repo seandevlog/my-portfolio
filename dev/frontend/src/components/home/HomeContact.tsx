@@ -3,6 +3,37 @@ import Button from "../ui/Button";
 import Status from "../ui/Status";
 import LinkedInIcon from "@/assets/LinkedInIcon";
 import { FileText } from "lucide-react";
+import Link from "next/link";
+import navItems from "@/data/navItems";
+
+const getNavItem = (label: string) => {
+  return navItems.find(
+    (item) => item.label.toLowerCase() === label.toLowerCase()
+  );
+};
+
+const mailItem = getNavItem("Mail");
+const githubItem = getNavItem("GitHub");
+const linkedinItem = getNavItem("LinkedIn");
+const resumeItem = getNavItem("Resume");
+
+const contactIconLinks = [
+  {
+    item: githubItem,
+    icon: <GitHubIcon className="h-[25px] w-[25px]" />,
+    ariaLabel: "Open GitHub profile",
+  },
+  {
+    item: linkedinItem,
+    icon: <LinkedInIcon className="h-[25px] w-[25px]" />,
+    ariaLabel: "Open LinkedIn profile",
+  },
+  {
+    item: resumeItem,
+    icon: <FileText className="h-[25px] w-[25px]" />,
+    ariaLabel: "Open resume PDF",
+  },
+].filter(({ item }) => item !== undefined);
 
 export default function HomeContact() {
   return (
@@ -56,22 +87,30 @@ export default function HomeContact() {
         </div>
 
         <div className="flex min-h-0 w-full flex-col items-center gap-[clamp(12px,2.5vmin,20px)] m:items-start">
-          <Button mode="primary">
-            <p className="uppercase">email_me</p>
-          </Button>
+          {mailItem && (
+            <Link href={mailItem.href}>
+              <Button mode="primary">
+                <p className="uppercase">email_me</p>
+              </Button>
+            </Link>
+          )}
 
           <div className="flex items-center gap-x-[18px] gap-y-[10px]">
-            <Button mode="secondary">
-              <GitHubIcon className="h-[25px] w-[25px]" />
-            </Button>
+            {contactIconLinks.map(({ item, icon, ariaLabel }) => {
+              if (!item) return null;
 
-            <Button mode="secondary">
-              <LinkedInIcon className="h-[25px] w-[25px]" />
-            </Button>
-
-            <Button mode="secondary">
-              <FileText className="h-[25px] w-[25px]" />
-            </Button>
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  target={item.isExternal ? "_blank" : undefined}
+                  rel={item.isExternal ? "noopener noreferrer" : undefined}
+                  aria-label={ariaLabel}
+                >
+                  <Button mode="secondary">{icon}</Button>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>

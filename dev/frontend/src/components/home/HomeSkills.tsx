@@ -33,7 +33,7 @@ export default function HomeSkills() {
               leading-[1.05]
             "
           >
-            Business Systems
+            Core Technologies
           </h2>
 
           <p

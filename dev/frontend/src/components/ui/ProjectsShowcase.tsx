@@ -2,8 +2,10 @@
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import type Project from "@/types/projects";
 import ProjectsList from "../ui/ProjectsList";
+import { slugify } from "@/utils/slugify";
 
 type ProjectsShowcaseProps = {
   projects: Project[];
@@ -27,6 +29,10 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
     left: 0,
     width: 250,
   });
+
+  const getProjectHref = useCallback((project: Project) => {
+    return `/projects/${slugify(project.title)}`;
+  }, []);
 
   const activeProjectItem = useMemo(() => {
     if (!activeProject) return null;
@@ -143,6 +149,7 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
           setActiveProject={setActiveProject}
           isAutoActivationLocked={isAutoActivationLocked}
           activateProjectAfterScroll={activateProjectAfterScroll}
+          getProjectHref={getProjectHref}
         />
 
         <aside
@@ -166,9 +173,8 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
           }}
           className={`
             pointer-events-none fixed top-1/2 z-30 hidden
-            -translate-y-1/2 flex-col gap-[clamp(8px,1.5vmin,10px)]
-            transition-all duration-500 ease-out
-            m:flex
+            -translate-y-1/2 transition-all duration-500 ease-out
+            m:block
             ${
               isPreviewVisible
                 ? "scale-100 opacity-100"
@@ -176,35 +182,48 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
             }
           `}
         >
-          <p
+          <Link
+            href={getProjectHref(activeProjectItem)}
+            aria-label={`Open ${activeProjectItem.title} project page`}
             className="
-              font-jetbrains uppercase text-secondary-lightest/70
-              text-[clamp(11px,1.3vmin,12px)]
+              pointer-events-auto flex w-full flex-col
+              gap-[clamp(8px,1.5vmin,10px)]
+              rounded-[8px]
+              transition-opacity duration-300 ease-out
+              hover:opacity-90
+              focus-visible:outline focus-visible:outline-1 focus-visible:outline-secondary-lighter
             "
           >
-            {activeProjectItem.date.toLocaleDateString("en-CA", {
-              month: "2-digit",
-              year: "numeric",
-            })}
-          </p>
+            <p
+              className="
+                font-jetbrains uppercase text-secondary-lightest/70
+                text-[clamp(11px,1.3vmin,12px)]
+              "
+            >
+              {activeProjectItem.date.toLocaleDateString("en-CA", {
+                month: "2-digit",
+                year: "numeric",
+              })}
+            </p>
 
-          <div
-            className="
-              relative w-full overflow-hidden rounded-[8px]
-              border border-accent-light/20 bg-primary-light
-              h-[clamp(160px,24vmin,180px)]
-              l:h-[clamp(180px,24vmin,220px)]
-              xl:h-[clamp(220px,24vmin,260px)]
-            "
-          >
-            <Image
-              src={activeProjectItem.screenshots[0].coverImage.src}
-              alt={activeProjectItem.screenshots[0].coverImage.alt}
-              fill
-              sizes={`${previewPosition.width}px`}
-              className="object-cover"
-            />
-          </div>
+            <div
+              className="
+                relative w-full overflow-hidden rounded-[8px]
+                border border-accent-light/20 bg-primary-light
+                h-[clamp(160px,24vmin,180px)]
+                l:h-[clamp(180px,24vmin,220px)]
+                xl:h-[clamp(220px,24vmin,260px)]
+              "
+            >
+              <Image
+                src={activeProjectItem.screenshots[0].coverImage.src}
+                alt={activeProjectItem.screenshots[0].coverImage.alt}
+                fill
+                sizes={`${previewPosition.width}px`}
+                className="object-cover transition-transform duration-500 ease-out hover:scale-105"
+              />
+            </div>
+          </Link>
         </aside>
       )}
     </>
