@@ -6,8 +6,8 @@ import Link from "next/link";
 import navItems from "@/data/navItems";
 
 const navLinkClassName = `
-  flex min-h-[44px] w-full items-center justify-center
-  px-0
+  flex min-h-[28px] w-full items-center justify-center
+  px-[12px]
   transition-colors duration-300 ease-out
   hover:bg-white/5
   focus-visible:outline focus-visible:outline-1 focus-visible:outline-secondary-lighter
@@ -55,9 +55,9 @@ export default function Navbar() {
       <nav
         aria-label="Primary navigation"
         className="
-          flex h-fit w-full min-w-section-minw-xs flex-wrap items-center justify-start
+          flex h-fit w-full min-w-[320px] flex-wrap items-center justify-start
           gap-x-[clamp(14px,3vw,20px)]
-          gap-y-[clamp(14px,2vmin,15px)]
+          gap-y-[clamp(6px,2vmin,8px)]
           s:min-w-section-minw-s
           m:min-w-section-minw-m
           l:min-w-section-minw-l
@@ -68,8 +68,8 @@ export default function Navbar() {
             href="#hero"
             aria-label="Back to hero section"
             className="
-              flex min-h-[44px] min-w-0 items-center gap-[clamp(5px,1vmin,8px)]
-              rounded-[4px] px-0
+              flex min-h-[28px] min-w-0 items-center gap-[clamp(5px,1vmin,8px)]
+              rounded-[4px] px-[12px]
               transition-colors duration-300 ease-out
               hover:bg-white/5
               focus-visible:outline-1 focus-visible:outline-secondary-lighter
@@ -100,13 +100,13 @@ export default function Navbar() {
 
         <ul
           className="
-            grid w-full basis-full grid-cols-4 overflow-hidden
+            flex w-full justify-between overflow-hidden
             list-none text-secondary-lighter
             text-[clamp(12px,1.8vmin,14px)]
             leading-none
 
-            s:ml-auto s:flex s:w-fit s:basis-auto s:items-center s:justify-start
-            s:gap-[clamp(8px,2vw,18px)]
+            s:ml-auto s:w-fit s:basis-auto s:items-center s:justify-start
+            s:gap-[clamp(8px,2vw,12px)]
             s:overflow-visible
           "
         >

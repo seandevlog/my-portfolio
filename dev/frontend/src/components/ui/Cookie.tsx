@@ -89,7 +89,7 @@ export default function Cookie({ text, mode }: CookieProps) {
     };
   }, [text]);
 
-  const background = mode === "dark" ? "#101415" : "#ffffff";
+  const background = mode === "dark" ? "#101415" : "#ffffff05";
   const color = mode === "dark" ? "#e0e3e5" : "#b7c7e8";
 
   return (

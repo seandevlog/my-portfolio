@@ -2,7 +2,7 @@
 
 import React, { Dispatch, SetStateAction } from "react";
 import ProjectItem from "../ui/ProjectItem";
-import type Project from "@/types/projects";
+import type Project from "@/types/project";
 
 type ProjectsListProps = {
   projects: Project[];

@@ -2,7 +2,7 @@ import { Button as ButtonMantine } from "@mantine/core";
 
 type ButtonProps = {
   children: React.ReactNode;
-  mode: "primary" | "secondary"
+  mode: "primary" | "secondary";
 }
 
 export default function Button({ children, mode }: ButtonProps) {

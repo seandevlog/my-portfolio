@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import type Project from "@/types/projects";
+import type Project from "@/types/project";
 import ProjectsList from "../ui/ProjectsList";
 import { slugify } from "@/utils/slugify";
 
@@ -31,7 +31,7 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
   });
 
   const getProjectHref = useCallback((project: Project) => {
-    return `/projects/${slugify(project.title)}`;
+    return `/${slugify(project.title)}`;
   }, []);
 
   const activeProjectItem = useMemo(() => {
@@ -191,7 +191,7 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
               rounded-[8px]
               transition-opacity duration-300 ease-out
               hover:opacity-90
-              focus-visible:outline focus-visible:outline-1 focus-visible:outline-secondary-lighter
+              focus-visible:outline-1 focus-visible:outline-secondary-lighter
             "
           >
             <p

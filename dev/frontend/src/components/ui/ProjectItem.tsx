@@ -9,7 +9,7 @@ import {
   useState,
 } from "react";
 import { useRouter } from "next/navigation";
-import type ProjectType from "@/types/projects";
+import type ProjectType from "@/types/project";
 
 type ProjectItemProps = {
   project: ProjectType;
@@ -194,7 +194,7 @@ export default function ProjectItem({
       className={`
         relative w-full overflow-hidden transition-[height] duration-700 ease-out
         cursor-pointer
-        focus-visible:outline focus-visible:outline-1 focus-visible:outline-secondary-lighter
+        focus-visible:outline-1 focus-visible:outline-secondary-lighter
       `}
     >
       <div

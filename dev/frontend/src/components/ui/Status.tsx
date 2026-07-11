@@ -1,11 +1,11 @@
-type StatusColors = "green" | "orange" | "blue" | "red";
+import type { statusColors } from "@/types/status";
 
 type StatusProps = {
   children: string;
-  color: StatusColors;
+  color: statusColors;
 };
 
-const colorTranslate = (color: StatusColors): string => {
+const colorTranslate = (color: statusColors): string => {
   switch (color) {
     case "orange":
       return "#f97316";
