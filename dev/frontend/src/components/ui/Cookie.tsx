@@ -105,7 +105,7 @@ export default function Cookie({ text, mode }: CookieProps) {
         border border-[#ffffff]/10
         px-[clamp(6px,1.2vmin,8px)]
         py-[clamp(5px,1vmin,8px)]
-        font-mono
+        font-jetbrains
         text-[clamp(10px,1.45vmin,16px)]
         leading-none
       "

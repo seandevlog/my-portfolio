@@ -4,7 +4,7 @@ import { useProject } from "@/contexts/ProjectContext";
 import Cookie from "../ui/Cookie";
 
 const metaClassName =
-  "font-jetbrains text-accent-light text-[clamp(10px,1.45vmin,16px)] uppercase py-[clamp(5px,1vmin,8px)]";
+  "font-jetbrains text-accent-light text-[clamp(10px,1.45vmin,16px)] uppercase py-[clamp(5px,1vmin,8px)] flex items-start leading-none";
 
 export default function ProjectMetaGrid() {
   const project = useProject();
@@ -22,7 +22,7 @@ export default function ProjectMetaGrid() {
         <Cookie text={project.type} mode="light" />
       </div>
 
-      <p className={metaClassName}>scope</p>
+        <p className={metaClassName}>scope</p>
 
       <div className="flex w-full flex-wrap gap-[6px]">
         {project.scope.map((scope) => (

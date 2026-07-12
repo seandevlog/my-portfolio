@@ -5,6 +5,7 @@ import Projects from "@/data/projects";
 import { ProjectProvider } from "@/contexts/ProjectContext";
 import { slugify } from "@/utils/slugify";
 import { notFound } from "next/navigation";
+import ProjectHeader from "@/components/project/ProjectHeader";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -33,6 +34,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       >
         <Back />
         <ProjectMeta />
+        <ProjectHeader />
       </main>
     </ProjectProvider>
   );
