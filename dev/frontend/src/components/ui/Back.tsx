@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import { Button } from "@mantine/core"
-import { ArrowUpLeft } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { ArrowUpLeft } from "lucide-react";
+import Link from "next/link";
 
 export default function Back() {
-  const router = useRouter();
-
   return (
-    <div className="w-full flex items-center min-w-section-minw-xs">
-      <Button
-        leftSection={
-          <ArrowUpLeft className="stroke-secondary-lightest"/>
-        }
-        styles={{
-          "root": {
-            background: "none",
-            padding: "0"
-          }
-        }}
-        classNames={{
-          "label": "!text-secondary-lightest !text-[16px] uppercase"
-        }}
-        onClick={() => router.push("/")}
-      >
-        Back
-      </Button>
-    </div>
-  )
+    <Link
+      href="/#projects"
+      className="
+        group inline-flex w-fit items-center gap-[clamp(6px,1vmin,10px)]
+        rounded-[6px]
+        font-jetbrains uppercase text-secondary-lightest/70
+        text-[clamp(11px,1.4vmin,14px)]
+        transition-colors duration-300 ease-out
+        hover:text-secondary-lightest
+        focus-visible:outline-1 focus-visible:outline-secondary-lighter
+      "
+    >
+      <ArrowUpLeft
+        className="
+          size-[clamp(16px,2vmin,20px)]
+          transition-transform duration-300 ease-out
+          group-hover:-translate-x-0.5 group-hover:-translate-y-0.5
+        "
+      />
+
+      Back to projects
+    </Link>
+  );
 }

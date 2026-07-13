@@ -200,7 +200,7 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
                 text-[clamp(11px,1.3vmin,12px)]
               "
             >
-              {activeProjectItem.date.toLocaleDateString("en-CA", {
+              {new Date(activeProjectItem.date).toLocaleDateString("en-CA", {
                 month: "2-digit",
                 year: "numeric",
               })}

@@ -65,7 +65,7 @@ export default function Navbar() {
       >
         <div className="flex h-fit min-w-0 items-center gap-[clamp(5px,1vmin,8px)]">
           <Link
-            href="#hero"
+            href="/#hero"
             aria-label="Back to hero section"
             className="
               flex min-h-[28px] min-w-0 items-center gap-[clamp(5px,1vmin,8px)]

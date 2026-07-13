@@ -252,19 +252,17 @@
 
 @layer components {
   .project-paragraph {
-    @apply font-outfit text-secondary-lightest
-      text-p1-xs
-      s:text-p1-s
-      m:text-p1-m
-      l:text-p1-l
-      xl:text-p1-xl;
+    @apply font-outfit text-secondary-lightest;
+
+    font-size: clamp(0.875rem, 0.78rem + 0.45vw, 1.375rem);
+    line-height: 1.45;
   }
 
   .project-page-section {
-    @apply font-outfit text-accent-light uppercase
-      text-h2-xs
-      s:text-h2-s
-      m:text-h2-m
-      l:text-h2-l
+    @apply font-outfit uppercase text-accent-light;
+
+    font-size: clamp(1.5rem, 1rem + 2.4vw, 3.5rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
   }
 }

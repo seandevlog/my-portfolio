@@ -1,14 +1,14 @@
-import type Project from "@/types/project"
+import type Project from "@/types/project";
 
 const Projects: Project[] = [
   {
     title: "San Lorenzo Ruiz",
-    date: new Date("2026-06-01"),
+    date: "2026-06-01",
     description: {
-      short: 
+      short:
         "A full-stack municipal web platform for publishing announcements, managing news content, and supporting organized public communication.",
       long:
-        "A client project built to help a municipality manage public information through a structured content management platform. The system includes public-facing pages, admin content workflows, news publishing, article image handling, and backend data management."
+        "A client project built to help a municipality manage public information through a structured content management platform. The system includes public-facing pages, admin content workflows, news publishing, article image handling, and backend data management.",
     },
 
     status: "Handover Phase",
@@ -40,13 +40,13 @@ const Projects: Project[] = [
     ],
 
     overview:
-      "A full-stack municipal web platform focused on public information, content management, and administrative publishing workflows. I handled the system from planning and interface structure to frontend implementation, backend API development, database modeling, image storage workflows, and deployment-ready architecture",
+      "A full-stack municipal web platform focused on public information, content management, and administrative publishing workflows. I handled the system from planning and interface structure to frontend implementation, backend API development, database modeling, image storage workflows, and deployment-ready architecture.",
 
     problem:
-      "The municipality needed a more organized way to publish announcements, manage news content, and present public information through a clear and maintainable web platform",
+      "The municipality needed a more organized way to publish announcements, manage news content, and present public information through a clear and maintainable web platform.",
 
     solution:
-      "I designed and developed a structured platform with public-facing content sections, admin workflows for managing articles and announcements, backend API routes, PostgreSQL data models, and image storage integration using Amazon S3",
+      "I designed and developed a structured platform with public-facing content sections, admin workflows for managing articles and announcements, backend API routes, PostgreSQL data models, and image storage integration using Amazon S3.",
 
     features: [
       "Public-facing municipal information pages",
@@ -59,8 +59,8 @@ const Projects: Project[] = [
       "Responsive interface design",
     ],
 
-    highlights: 
-      "Built a full-stack content management system with Next.js, Spring Boot, PostgreSQL, and Amazon S3, focusing on maintainable government communication workflows, structured data, and secure admin-side content handling",
+    highlights:
+      "Built a full-stack content management system with Next.js, Spring Boot, PostgreSQL, and Amazon S3, focusing on maintainable government communication workflows, structured data, and secure admin-side content handling.",
 
     architecture: {
       src: "/placeholder-image.png",
@@ -95,20 +95,35 @@ const Projects: Project[] = [
     ],
 
     challenges: [
-      "Challenge: Structuring public content and admin workflows clearly. Decision: Separated public-facing pages from admin management features. Result: The platform became easier to maintain and easier for users to understand.",
-      "Challenge: Managing article images across admin and public pages. Decision: Used Amazon S3 for image storage and connected image metadata to content records. Result: The project gained a more scalable and maintainable media workflow.",
-      "Challenge: Translating client requirements into a working system. Decision: Broke the platform into content sections, API routes, and database models. Result: The project became easier to build, test, and expand.",
+      {
+        challenge:
+          "Structuring public content and admin workflows clearly without making the system difficult to maintain.",
+        decision:
+          "Separated public-facing pages from admin management features so resident-facing content and internal content workflows stayed organized.",
+      },
+      {
+        challenge:
+          "Managing article images across both admin workflows and public content pages.",
+        decision:
+          "Used Amazon S3 for image storage and connected image metadata to content records, creating a more scalable and maintainable media workflow.",
+      },
+      {
+        challenge:
+          "Translating client requirements into a working full-stack system.",
+        decision:
+          "Broke the platform into clear content sections, API routes, database models, and admin workflows so the project became easier to build, test, and expand.",
+      },
     ],
   },
-  
+
   {
     title: "Inventory Tracker",
-    date: new Date("2026-02-01"),
+    date: "2026-02-01",
     description: {
       short:
         "A MERN inventory management system for tracking items, orders, shipments, refunds, billing, and transaction records.",
       long:
-        "My first personal full-stack project, built while actively learning and applying as many practical full-stack features as I could. The project focuses on inventory records, orders, shipments, refunds, billing, authentication, validation, image uploads, and related transaction activity. Because it was built as a learning-heavy project, the interface is less polished than my newer work, but it shows my growth in backend structure, feature planning, and full-stack problem solving."
+        "My first personal full-stack project, built while actively learning and applying as many practical full-stack features as I could. The project focuses on inventory records, orders, shipments, refunds, billing, authentication, validation, image uploads, and related transaction activity. Because it was built as a learning-heavy project, the interface is less polished than my newer work, but it shows my growth in backend structure, feature planning, and full-stack problem solving.",
     },
 
     status: "Live",
@@ -200,17 +215,42 @@ const Projects: Project[] = [
     ],
 
     challenges: [
-      "Challenge: Connecting multiple inventory workflows together. Decision: Organized the system around inventory items, orders, shipments, refunds, billing, and transactions. Result: Users can view related activity from a more centralized structure.",
-      "Challenge: Handling secure user sessions. Decision: Used JWT for authentication and Bcrypt for password hashing. Result: The system gained a more realistic authentication flow.",
-      "Challenge: Managing uploaded item images. Decision: Used Multer for upload handling and Cloudinary for image storage. Result: Inventory records could include external image assets without storing files directly in the app.",
-      "Challenge: Keeping backend data reliable. Decision: Used Joi validation and structured Express routes. Result: API requests became easier to validate, debug, and maintain.",
-      "Challenge: Balancing learning with design polish. Decision: Prioritized building and connecting full-stack features such as authentication, validation, image uploads, CRUD workflows, and related records. Result: The final interface is less polished, but the project helped me practice many real application patterns and understand how full-stack systems fit together."
+      {
+        challenge:
+          "Connecting multiple inventory workflows together without making the data feel scattered.",
+        decision:
+          "Organized the system around inventory items, orders, shipments, refunds, billing, and transactions so related activity could be viewed from a more centralized structure.",
+      },
+      {
+        challenge:
+          "Handling secure user sessions in a more realistic full-stack application.",
+        decision:
+          "Used JWT for authentication and Bcrypt for password hashing to practice a more practical login and session flow.",
+      },
+      {
+        challenge:
+          "Managing uploaded item images without storing files directly inside the application.",
+        decision:
+          "Used Multer for upload handling and Cloudinary for image storage so inventory records could reference external image assets.",
+      },
+      {
+        challenge:
+          "Keeping backend requests reliable while handling many CRUD and transaction workflows.",
+        decision:
+          "Used Joi validation and structured Express routes so API requests became easier to validate, debug, and maintain.",
+      },
+      {
+        challenge:
+          "Balancing learning, feature building, and interface polish in a first full-stack project.",
+        decision:
+          "Prioritized building and connecting full-stack features such as authentication, validation, image uploads, CRUD workflows, and related records. The final interface is less polished, but the project helped me understand how full-stack systems fit together.",
+      },
     ],
   },
 
   {
     title: "Workout Apparel Store",
-    date: new Date("2025-04-01"),
+    date: "2025-04-01",
     description: {
       short:
         "An Express and EJS workout apparel website focused on server-side validation, email integration, dynamic routing, and deployment practice.",
@@ -232,14 +272,7 @@ const Projects: Project[] = [
       "Documentation",
     ],
 
-    stack: [
-      "Express",
-      "EJS",
-      "JavaScript",
-      "Vercel",
-      "HTML",
-      "CSS",
-    ],
+    stack: ["Express", "EJS", "JavaScript", "Vercel", "HTML", "CSS"],
 
     overview:
       "Workout Apparel Store is a server-rendered academic project built with Express.js and EJS. The project focused on learning backend routing, dynamic page rendering, form handling, secure server-side validation, email integration, and deployment using Vercel.",
@@ -274,8 +307,7 @@ const Projects: Project[] = [
           src: "/placeholder-image.png",
           alt: "Workout Apparel Store homepage preview.",
         },
-        description:
-          "Homepage for the workout apparel store academic project.",
+        description: "Homepage for the workout apparel store academic project.",
       },
       {
         coverImage: {
@@ -296,11 +328,26 @@ const Projects: Project[] = [
     ],
 
     challenges: [
-      "Challenge: Validating user input safely. Decision: Handled validation on the server instead of only relying on the frontend. Result: The form workflow became more reliable and realistic.",
-      "Challenge: Adding email functionality to a backend app. Decision: Integrated email handling through the Express application. Result: The contact form became functional beyond static submission.",
-      "Challenge: Deploying a Node/Express project. Decision: Configured the app for Vercel deployment. Result: I learned how to prepare a server-rendered Express project for a hosted environment.",
+      {
+        challenge:
+          "Validating user input safely instead of relying only on client-side checks.",
+        decision:
+          "Handled validation on the server so the form workflow became more reliable and closer to a real backend application.",
+      },
+      {
+        challenge:
+          "Adding email functionality to a server-rendered backend app.",
+        decision:
+          "Integrated email handling through the Express application so the contact form became functional beyond a static submission.",
+      },
+      {
+        challenge:
+          "Deploying a Node and Express project to a hosted environment.",
+        decision:
+          "Configured the application for Vercel deployment, which helped me learn how to prepare a server-rendered Express project for production-style hosting.",
+      },
     ],
-  }
+  },
 ];
 
 export default Projects;

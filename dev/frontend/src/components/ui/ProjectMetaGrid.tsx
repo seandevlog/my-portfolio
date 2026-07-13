@@ -16,13 +16,7 @@ export default function ProjectMetaGrid() {
         gap-x-[16px] gap-y-[14px]
       "
     >
-      <p className={metaClassName}>type</p>
-
-      <div className="flex w-full flex-wrap gap-[6px]">
-        <Cookie text={project.type} mode="light" />
-      </div>
-
-        <p className={metaClassName}>scope</p>
+      <p className={metaClassName}>scope</p>
 
       <div className="flex w-full flex-wrap gap-[6px]">
         {project.scope.map((scope) => (

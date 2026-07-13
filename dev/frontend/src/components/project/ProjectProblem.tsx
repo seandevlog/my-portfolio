@@ -2,7 +2,7 @@
 
 import { useProject } from "@/contexts/ProjectContext";
 
-export default function ProjectOverview() {
+export default function ProjectProblem() {
   const project = useProject();
 
   return (
@@ -24,20 +24,20 @@ export default function ProjectOverview() {
             leading-none
           "
         >
-          01 / overview
+          02 / problem
         </p>
 
-        <h1 className="project-page-section">System Overview</h1>
+        <h1 className="project-page-section">Business Problem</h1>
       </div>
 
       <div
         className="
-          rounded-[12px] border border-accent-light/15 bg-white/[0.03]
+          rounded-[12px] border border-red-500/20 bg-red-500/[0.04]
           p-[clamp(16px,3vmin,28px)]
         "
       >
         <p className="project-paragraph max-w-[900px]">
-          {project.overview}
+          {project.problem}
         </p>
       </div>
     </section>

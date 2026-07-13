@@ -29,9 +29,14 @@ type ProjectPreview = {
   description: string
 }
 
+type ProjectChallenge = {
+  challenge: string;
+  decision: string;
+};
+
 export default interface Project {
   title: string,
-  date: Date,
+  date: string,
   description: {
     short: string,
 
@@ -90,7 +95,7 @@ export default interface Project {
   /**
    * What are the challenges and decisions made on each
    */
-  challenges: string[],
+  challenges: ProjectChallenge[],
 
   links?: {
     github?: string,

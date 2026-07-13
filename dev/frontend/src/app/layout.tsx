@@ -59,6 +59,7 @@ export default function RootLayout({
       lang="en"
       {...mantineHtmlProps}
       className={`${outfit.variable} ${jetbrains.variable} h-full scroll-smooth antialiased`}
+      data-scroll-behavior="smooth"
     >
       <head>
         <ColorSchemeScript defaultColorScheme="light" />
