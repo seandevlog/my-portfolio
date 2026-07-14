@@ -10,30 +10,29 @@ import {
   useState,
 } from "react";
 
-type ProjectFocusContextValue = {
+type ScrollFocusContextValue = {
   activeId: string | null;
   registerBlock: (id: string, element: HTMLDivElement) => void;
   unregisterBlock: (id: string) => void;
 };
 
-const ProjectFocusContext = createContext<ProjectFocusContextValue | null>(null);
+const ScrollFocusContext = createContext<ScrollFocusContextValue | null>(null);
 
-type ProjectFocusProviderProps = {
+type ScrollFocusProviderProps = {
   children: ReactNode;
+  rootMargin?: string;
 };
 
-export function ProjectFocusProvider({ children }: ProjectFocusProviderProps) {
+export function ScrollFocusProvider({
+  children,
+  rootMargin = "-47% 0px -47% 0px",
+}: ScrollFocusProviderProps) {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const elementToIdRef = useRef(new Map<Element, string>());
   const orderRef = useRef<string[]>([]);
 
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  // A thin band around the vertical center of the viewport. Whichever
-  // section is crossing that band is the "active" one. This lets the
-  // browser do all the work — it fires automatically on scroll, resize,
-  // and once layout settles after navigation — instead of us manually
-  // polling with timeouts/rAF.
   const getObserver = useCallback(() => {
     if (observerRef.current || typeof IntersectionObserver === "undefined") {
       return observerRef.current;
@@ -45,8 +44,6 @@ export function ProjectFocusProvider({ children }: ProjectFocusProviderProps) {
 
         if (intersecting.length === 0) return;
 
-        // If more than one happens to overlap the band, pick whichever
-        // is closest to the exact viewport center.
         const viewportCenter = window.innerHeight / 2;
 
         let closestId: string | null = null;
@@ -71,15 +68,13 @@ export function ProjectFocusProvider({ children }: ProjectFocusProviderProps) {
         }
       },
       {
-        // Shrinks the observed viewport to a thin horizontal band at
-        // the vertical center (roughly the middle 6%).
-        rootMargin: "-47% 0px -47% 0px",
+        rootMargin,
         threshold: 0,
       }
     );
 
     return observerRef.current;
-  }, []);
+  }, [rootMargin]);
 
   const registerBlock = useCallback(
     (id: string, element: HTMLDivElement) => {
@@ -89,8 +84,6 @@ export function ProjectFocusProvider({ children }: ProjectFocusProviderProps) {
         orderRef.current.push(id);
       }
 
-      // Fallback so something is highlighted immediately, before the
-      // observer's first callback fires.
       setActiveId((current) => current ?? orderRef.current[0] ?? null);
 
       getObserver()?.observe(element);
@@ -113,6 +106,11 @@ export function ProjectFocusProvider({ children }: ProjectFocusProviderProps) {
     }
 
     orderRef.current = orderRef.current.filter((blockId) => blockId !== id);
+
+    setActiveId((current) => {
+      if (current !== id) return current;
+      return orderRef.current[0] ?? null;
+    });
   }, []);
 
   useEffect(() => {
@@ -120,11 +118,12 @@ export function ProjectFocusProvider({ children }: ProjectFocusProviderProps) {
       observerRef.current?.disconnect();
       observerRef.current = null;
       elementToIdRef.current.clear();
+      orderRef.current = [];
     };
   }, []);
 
   return (
-    <ProjectFocusContext.Provider
+    <ScrollFocusContext.Provider
       value={{
         activeId,
         registerBlock,
@@ -132,15 +131,15 @@ export function ProjectFocusProvider({ children }: ProjectFocusProviderProps) {
       }}
     >
       {children}
-    </ProjectFocusContext.Provider>
+    </ScrollFocusContext.Provider>
   );
 }
 
-export function useProjectFocus() {
-  const context = useContext(ProjectFocusContext);
+export function useScrollFocus() {
+  const context = useContext(ScrollFocusContext);
 
   if (!context) {
-    throw new Error("useProjectFocus must be used inside ProjectFocusProvider");
+    throw new Error("useScrollFocus must be used inside ScrollFocusProvider");
   }
 
   return context;

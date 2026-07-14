@@ -2,7 +2,7 @@ import Back from "@/components/ui/Back";
 import Navbar from "@/components/ui/Navbar";
 import Projects from "@/data/projects";
 import { ProjectProvider } from "@/contexts/ProjectContext";
-import { ProjectFocusProvider } from "@/contexts/ProjectFocusContext";
+import { ScrollFocusProvider } from "@/contexts/ScrollFocusContext";
 import { slugify } from "@/utils/slugify";
 import { notFound } from "next/navigation";
 import ProjectMeta from "@/components/project/ProjectMeta";
@@ -15,7 +15,7 @@ import ProjectHighlight from "@/components/project/ProjectHighlight";
 import ProjectArchitecture from "@/components/project/ProjectArchitecture";
 import ProjectScreenshots from "@/components/project/ProjectScreenshots";
 import ProjectChallenges from "@/components/project/ProjectChallenges";
-import ProjectFocusBlock from "@/components/ui/ProjectFocusBlock";
+import ScrollFocusBlock from "@/components/ui/ScrollFocusBlock";
 
 type ProjectPageProps = {
   params: Promise<{
@@ -36,7 +36,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
     <ProjectProvider project={project}>
       <Navbar />
 
-      <ProjectFocusProvider key={slug}>
+      <ScrollFocusProvider key={slug}>
         <main
           className="
             flex w-full flex-col items-center
@@ -44,7 +44,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             px-[40px] py-[40px]
           "
         >
-          <ProjectFocusBlock id="intro">
+          <ScrollFocusBlock id="intro">
             <div
               className="
                 flex w-full max-w-section-minw-l flex-col
@@ -65,41 +65,41 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 <ProjectMeta />
               </div>
             </div>
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="overview">
+          <ScrollFocusBlock id="overview">
             <ProjectOverview />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="problem">
+          <ScrollFocusBlock id="problem">
             <ProjectProblem />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="solution">
+          <ScrollFocusBlock id="solution">
             <ProjectSolution />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="features">
+          <ScrollFocusBlock id="features">
             <ProjectFeatures />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="highlight">
+          <ScrollFocusBlock id="highlight">
             <ProjectHighlight />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="architecture">
+          <ScrollFocusBlock id="architecture">
             <ProjectArchitecture />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="screenshots">
+          <ScrollFocusBlock id="screenshots">
             <ProjectScreenshots />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
 
-          <ProjectFocusBlock id="challenges">
+          <ScrollFocusBlock id="challenges">
             <ProjectChallenges />
-          </ProjectFocusBlock>
+          </ScrollFocusBlock>
         </main>
-      </ProjectFocusProvider>
+      </ScrollFocusProvider>
     </ProjectProvider>
   );
 }
