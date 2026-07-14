@@ -39,7 +39,7 @@ export default function ScrollFocusBlock({
     <div
       ref={blockRef}
       className={`
-        w-full transition-all duration-700 ease-out
+        w-full min-w-section-minw-xs transition-all duration-700 ease-out
         motion-reduce:transition-none
         ${isFocused ? focusedClassName : unfocusedClassName}
         ${className}

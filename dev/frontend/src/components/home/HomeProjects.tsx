@@ -8,7 +8,7 @@ export default function HomeProjects() {
       id="projects"
       className="
         relative flex h-fit w-full scroll-mt-[90px] justify-center
-        px-section-x-xs py-section-y-xs
+        px-section-x-xs pb-section-y-xl pt-section-y-xl
         s:px-section-x-s s:py-section-y-s
         m:px-section-x-m m:py-section-y-m
         l:px-section-x-l l:py-section-y-l

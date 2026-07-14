@@ -13,44 +13,34 @@ export default function Home() {
     <ScrollFocusProvider>
       <ScrollFocusBlock
         id="hero"
-        unfocusedClassName="scale-[0.995] blur-[1px] opacity-50"
       >
         <HomeHero />
       </ScrollFocusBlock>
 
       <Navbar />
 
-      <ScrollFocusBlock
-        id="projects"
-        unfocusedClassName="scale-[0.995] blur-[1px] opacity-50"
-      >
-        <HomeProjects />
-      </ScrollFocusBlock>
+      <HomeProjects />
 
       <ScrollFocusBlock
         id="experience"
-        unfocusedClassName="scale-[0.995] blur-[1px] opacity-50"
       >
         <HomeExperience />
       </ScrollFocusBlock>
 
       <ScrollFocusBlock
         id="skills"
-        unfocusedClassName="scale-[0.995] blur-[1px] opacity-50"
       >
         <HomeSkills />
       </ScrollFocusBlock>
 
       <ScrollFocusBlock
         id="about"
-        unfocusedClassName="scale-[0.995] blur-[1px] opacity-50"
       >
         <HomeAbout />
       </ScrollFocusBlock>
 
       <ScrollFocusBlock
         id="contact"
-        unfocusedClassName="scale-[0.995] blur-[1px] opacity-50"
       >
         <HomeContact />
       </ScrollFocusBlock>

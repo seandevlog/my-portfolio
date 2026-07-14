@@ -40,8 +40,13 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
         <main
           className="
             flex w-full flex-col items-center
-            gap-[clamp(40px,8vmin,96px)]
-            px-[40px] py-[40px]
+
+            gap-[clamp(56px,9vmin,120px)]
+
+            px-section-x-xs py-[clamp(32px,6vmin,72px)]
+            s:px-section-x-s
+            m:px-section-x-m
+            l:px-section-x-l
           "
         >
           <ScrollFocusBlock id="intro">
