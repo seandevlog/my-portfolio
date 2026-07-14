@@ -133,10 +133,7 @@ export default function ProjectItem({
       const itemTop =
         itemRef.current.getBoundingClientRect().top + window.scrollY;
 
-      const expandedTitleCenter =
-        itemTop + sizes.stack + sizes.gap + sizes.title / 2;
-
-      return expandedTitleCenter - window.innerHeight / 2;
+      return itemTop - window.innerHeight * 0.55;
     });
   };
 

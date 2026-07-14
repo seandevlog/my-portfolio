@@ -11,9 +11,14 @@ type ProjectsShowcaseProps = {
   projects: Project[];
 };
 
+const AUTO_ACTIVATION_LOCK_MS = 750;
+
 export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const phantomRef = useRef<HTMLElement | null>(null);
+  const unlockAutoActivationTimerRef = useRef<ReturnType<
+    typeof setTimeout
+  > | null>(null);
 
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const [isAutoActivationLocked, setIsAutoActivationLocked] = useState(false);
@@ -55,42 +60,50 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
     });
   }, []);
 
-  // Stable identity — reads current activeProject via the functional
-  // updater instead of depending on it, so this never changes
-  // between renders.
+  const unlockAutoActivationAfterDelay = useCallback(() => {
+    if (unlockAutoActivationTimerRef.current) {
+      clearTimeout(unlockAutoActivationTimerRef.current);
+    }
+
+    unlockAutoActivationTimerRef.current = setTimeout(() => {
+      setIsAutoActivationLocked(false);
+    }, AUTO_ACTIVATION_LOCK_MS);
+  }, []);
+
   const activateProjectAfterScroll = useCallback(
     (projectTitle: string, getTargetScrollY: () => number | null) => {
       setIsAutoActivationLocked(true);
+
+      if (unlockAutoActivationTimerRef.current) {
+        clearTimeout(unlockAutoActivationTimerRef.current);
+      }
 
       setActiveProject((current) =>
         current === projectTitle ? current : null
       );
 
       requestAnimationFrame(() => {
-        const targetScrollY = getTargetScrollY();
-
-        if (targetScrollY !== null) {
-          window.scrollTo({
-            top: Math.max(0, targetScrollY),
-            behavior: "smooth",
-          });
-        }
-
-        setActiveProject(projectTitle);
-
         requestAnimationFrame(() => {
-          setIsAutoActivationLocked(false);
+          const targetScrollY = getTargetScrollY();
+
+          if (targetScrollY !== null) {
+            window.scrollTo({
+              top: Math.max(0, targetScrollY),
+              behavior: "smooth",
+            });
+          }
+
+          setActiveProject(projectTitle);
+          unlockAutoActivationAfterDelay();
         });
       });
     },
-    []
+    [unlockAutoActivationAfterDelay]
   );
 
   useEffect(() => {
     updatePreviewPosition();
 
-    // Covers window resize too: phantomRef's width is viewport-driven
-    // CSS (clamp/vw), so no separate resize listener is needed.
     const resizeObserver = new ResizeObserver(updatePreviewPosition);
 
     if (phantomRef.current) {
@@ -117,6 +130,14 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
     observer.observe(contentRef.current);
 
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (unlockAutoActivationTimerRef.current) {
+        clearTimeout(unlockAutoActivationTimerRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -180,7 +201,7 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
               rounded-[8px]
               transition-opacity duration-300 ease-out
               hover:opacity-90
-              focus-visible:outline-1 focus-visible:outline-secondary-lighter
+              focus-visible:outline focus-visible:outline-1 focus-visible:outline-secondary-lighter
             "
           >
             <p
