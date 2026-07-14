@@ -11,15 +11,9 @@ type ProjectsShowcaseProps = {
   projects: Project[];
 };
 
-const EXPAND_DELAY_MS = 100;
-const COLLAPSE_DELAY_MS = 500;
-
 export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const phantomRef = useRef<HTMLElement | null>(null);
-
-  const activationTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const collapseTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const [activeProject, setActiveProject] = useState<string | null>(null);
   const [isAutoActivationLocked, setIsAutoActivationLocked] = useState(false);
@@ -30,105 +24,99 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
     width: 250,
   });
 
+  const projectsByTitle = useMemo(() => {
+    return new Map(projects.map((project) => [project.title, project]));
+  }, [projects]);
+
+  const activeProjectItem = activeProject
+    ? projectsByTitle.get(activeProject) ?? null
+    : null;
+
   const getProjectHref = useCallback((project: Project) => {
     return `/${slugify(project.title)}`;
   }, []);
 
-  const activeProjectItem = useMemo(() => {
-    if (!activeProject) return null;
+  const updatePreviewPosition = useCallback(() => {
+    if (!phantomRef.current) return;
 
-    return projects.find((project) => project.title === activeProject) ?? null;
-  }, [activeProject, projects]);
+    const phantomRect = phantomRef.current.getBoundingClientRect();
 
+    const nextPosition = {
+      left: Math.round(phantomRect.left),
+      width: Math.round(phantomRect.width),
+    };
+
+    setPreviewPosition((currentPosition) => {
+      const isSamePosition =
+        currentPosition.left === nextPosition.left &&
+        currentPosition.width === nextPosition.width;
+
+      return isSamePosition ? currentPosition : nextPosition;
+    });
+  }, []);
+
+  // Stable identity — reads current activeProject via the functional
+  // updater instead of depending on it, so this never changes
+  // between renders.
   const activateProjectAfterScroll = useCallback(
     (projectTitle: string, getTargetScrollY: () => number | null) => {
       setIsAutoActivationLocked(true);
 
-      if (collapseTimerRef.current) {
-        clearTimeout(collapseTimerRef.current);
-      }
-
-      if (activationTimerRef.current) {
-        clearTimeout(activationTimerRef.current);
-      }
-
-      const shouldCollapseCurrentProject =
-        activeProject !== null && activeProject !== projectTitle;
-
-      if (shouldCollapseCurrentProject) {
-        setActiveProject(null);
-      }
-
-      collapseTimerRef.current = setTimeout(
-        () => {
-          requestAnimationFrame(() => {
-            const targetScrollY = getTargetScrollY();
-
-            if (targetScrollY === null) {
-              setIsAutoActivationLocked(false);
-              return;
-            }
-
-            window.scrollTo({
-              top: Math.max(0, targetScrollY),
-              behavior: "smooth",
-            });
-
-            activationTimerRef.current = setTimeout(() => {
-              setActiveProject(projectTitle);
-              setIsAutoActivationLocked(false);
-            }, EXPAND_DELAY_MS);
-          });
-        },
-        shouldCollapseCurrentProject ? COLLAPSE_DELAY_MS : 0
+      setActiveProject((current) =>
+        current === projectTitle ? current : null
       );
+
+      requestAnimationFrame(() => {
+        const targetScrollY = getTargetScrollY();
+
+        if (targetScrollY !== null) {
+          window.scrollTo({
+            top: Math.max(0, targetScrollY),
+            behavior: "smooth",
+          });
+        }
+
+        setActiveProject(projectTitle);
+
+        requestAnimationFrame(() => {
+          setIsAutoActivationLocked(false);
+        });
+      });
     },
-    [activeProject]
+    []
   );
 
   useEffect(() => {
-    return () => {
-      if (activationTimerRef.current) {
-        clearTimeout(activationTimerRef.current);
-      }
+    updatePreviewPosition();
 
-      if (collapseTimerRef.current) {
-        clearTimeout(collapseTimerRef.current);
-      }
-    };
-  }, []);
+    // Covers window resize too: phantomRef's width is viewport-driven
+    // CSS (clamp/vw), so no separate resize listener is needed.
+    const resizeObserver = new ResizeObserver(updatePreviewPosition);
+
+    if (phantomRef.current) {
+      resizeObserver.observe(phantomRef.current);
+    }
+
+    return () => resizeObserver.disconnect();
+  }, [updatePreviewPosition]);
 
   useEffect(() => {
-    const updatePreview = () => {
-      if (!contentRef.current || !phantomRef.current) return;
+    if (!contentRef.current) return;
 
-      const contentRect = contentRef.current.getBoundingClientRect();
-      const phantomRect = phantomRef.current.getBoundingClientRect();
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsPreviewVisible(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "-42% 0px -42% 0px",
+        threshold: 0,
+      }
+    );
 
-      const screenMiddle = window.innerHeight / 2;
-      const offset = -100;
+    observer.observe(contentRef.current);
 
-      const isMiddleInsideContent =
-        contentRect.top <= screenMiddle - offset &&
-        contentRect.bottom >= screenMiddle + offset;
-
-      setIsPreviewVisible(isMiddleInsideContent);
-
-      setPreviewPosition({
-        left: phantomRect.left,
-        width: phantomRect.width,
-      });
-    };
-
-    updatePreview();
-
-    window.addEventListener("scroll", updatePreview);
-    window.addEventListener("resize", updatePreview);
-
-    return () => {
-      window.removeEventListener("scroll", updatePreview);
-      window.removeEventListener("resize", updatePreview);
-    };
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -173,12 +161,13 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
           }}
           className={`
             pointer-events-none fixed top-1/2 z-30 hidden
-            -translate-y-1/2 transition-all duration-500 ease-out
+            -translate-y-1/2 transition-[opacity,transform] duration-300 ease-out
+            will-change-[opacity,transform]
             m:block
             ${
               isPreviewVisible
                 ? "scale-100 opacity-100"
-                : "scale-95 opacity-0"
+                : "scale-[0.98] opacity-0"
             }
           `}
         >
@@ -220,7 +209,10 @@ export default function ProjectsShowcase({ projects }: ProjectsShowcaseProps) {
                 alt={activeProjectItem.screenshots[0].coverImage.alt}
                 fill
                 sizes={`${previewPosition.width}px`}
-                className="object-cover transition-transform duration-500 ease-out hover:scale-105"
+                className="
+                  object-cover transition-transform duration-500 ease-out
+                  hover:scale-105
+                "
               />
             </div>
           </Link>
