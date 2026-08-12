@@ -114,6 +114,10 @@ const Projects: Project[] = [
           "Broke the platform into clear content sections, API routes, database models, and admin workflows so the project became easier to build, test, and expand.",
       },
     ],
+
+    links: {
+      live: "https://lgusanlorenzoruiz.org"
+    }
   },
 
   {
@@ -246,6 +250,11 @@ const Projects: Project[] = [
           "Prioritized building and connecting full-stack features such as authentication, validation, image uploads, CRUD workflows, and related records. The final interface is less polished, but the project helped me understand how full-stack systems fit together.",
       },
     ],
+
+    links: {
+      github: "https://github.com/seandevlog/inventory-tracker",
+      live: "https://inventory-tracker-mu-roan.vercel.app"
+    }
   },
 
   {
@@ -347,6 +356,10 @@ const Projects: Project[] = [
           "Configured the application for Vercel deployment, which helped me learn how to prepare a server-rendered Express project for production-style hosting.",
       },
     ],
+
+    links: {
+      github: "https://github.com/seandevlog/workout-apparel-store"
+    }
   },
 ];
 
