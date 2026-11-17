@@ -63,14 +63,14 @@ const Projects: Project[] = [
       "Built a full-stack content management system with Next.js, Spring Boot, PostgreSQL, and Amazon S3, focusing on maintainable government communication workflows, structured data, and secure admin-side content handling.",
 
     architecture: {
-      src: "/placeholder-image.png",
+      src: "/municipal_architecture.png",
       alt: "Architecture diagram for the municipal content management platform showing Next.js, Spring Boot, PostgreSQL, and Amazon S3",
     },
 
     screenshots: [
       {
         coverImage: {
-          src: "/placeholder-image.png",
+          src: "/municipal_dashboard.png",
           alt: "Municipal admin dashboard interface preview.",
         },
         description:
@@ -78,7 +78,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "/placeholder-image.png",
+          src: "/municipal_edit.png",
           alt: "Municipal article editor interface preview.",
         },
         description:
@@ -86,7 +86,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "/placeholder-image.png",
+          src: "/municipal_news.png",
           alt: "Public municipal news page preview.",
         },
         description:
@@ -121,7 +121,139 @@ const Projects: Project[] = [
   },
 
   {
-    title: "Inventory Tracker",
+    title: "AstroPulse",
+    date: "2026-11-15",
+
+    description: {
+      short:
+        "A collaborative astronaut bone-health monitoring prototype focused on REST API development, biomarker trend analysis, and health data processing.",
+      long:
+        "A hackathon project developed by Team SpaceGo during NASA Space Apps Challenge Toronto 2026. AstroPulse is a health-monitoring prototype designed to help astronauts track changes in bone-health indicators during space missions. My contribution focused on developing the Express.js mock API and analysis engine to process simulated biomarker measurements, calculate changes from preflight baselines, and combine health trends with symptoms and exercise records.",
+    },
+
+    status: "Live",
+    type: "Prototype",
+
+    system: [
+      "Astronaut Health Monitoring System",
+      "Bone Health Analytics Platform",
+      "REST API",
+    ],
+
+    scope: [
+      "Backend API Development",
+      "Mock Data Integration",
+      "Data Validation",
+      "Biomarker Analysis",
+      "Time-Series Analysis",
+      "Symptom and Exercise Analysis",
+      "Automated Testing",
+      "GitHub Collaboration",
+    ],
+
+    stack: [
+      "JavaScript",
+      "Node.js",
+      "Express.js",
+      "REST APIs",
+      "Node.js Test Runner",
+      "Git",
+      "GitHub",
+    ],
+
+    overview:
+      "AstroPulse is a collaborative prototype developed during a two-day NASA Space Apps hackathon in Toronto. The project explores how astronauts could monitor changes in bone-health indicators using biochemical measurements, symptoms, and exercise records. I was responsible for building the backend mock API and modular analysis engine, which processed simulated astronaut health data and returned structured results for the team's frontend dashboard.",
+
+    problem:
+      "Astronauts experience changes in bone metabolism during long-duration spaceflight, while direct bone-density monitoring during missions remains limited. Individual biomarker measurements can also be difficult to interpret without preflight baselines and historical trends. The project aimed to make these changes easier to monitor and understand throughout a simulated mission.",
+
+    solution:
+      "I developed an Express.js REST API that provides simulated astronaut measurements for serum CTX, serum P1NP, and urinary calcium. I implemented modular analysis functions to validate measurements, calculate percentage changes from preflight baselines, analyze trends across mission days, and summarize symptoms and exercise adherence. These results were combined into a JSON report for frontend integration, supported by automated tests.",
+
+    features: [
+      "Mock REST API for simulated astronaut health measurements",
+      "Serum CTX, serum P1NP, and urinary calcium tracking",
+      "Preflight baseline comparisons",
+      "Biomarker percentage-change calculations",
+      "Historical trend analysis across mission days",
+      "Measurement validation and data-quality checks",
+      "Back-pain and posture symptom tracking",
+      "Exercise adherence analysis",
+      "Combined bone-health analysis endpoint",
+      "Structured JSON responses for frontend integration",
+      "Automated tests for analytical calculations",
+    ],
+
+    highlights:
+      "Developed the backend API and modular analysis engine for a collaborative two-day hackathon project. Implemented biomarker trend calculations, baseline comparisons, validation logic, and combined health reporting using simulated data. Collaborated with teammates through GitHub branches and pull requests to support integration with the frontend.",
+
+    architecture: {
+      src: "/astropulse_architecture.png",
+      alt: "AstroPulse architecture showing the Express mock API, biomarker analysis engine, symptom and exercise processing, and frontend dashboard.",
+    },
+
+    screenshots: [
+      {
+        coverImage: {
+          src: "/astropulse_dashboard.png",
+          alt: "AstroPulse astronaut bone-health dashboard.",
+        },
+        description:
+          "Dashboard displaying simulated astronaut bone-health indicators and monitoring information.",
+      },
+      {
+        coverImage: {
+          src: "/astropulse_trendanalysis.png",
+          alt: "AstroPulse biomarker trend analysis.",
+        },
+        description:
+          "Visualization of serum CTX, serum P1NP, and urinary calcium trends compared with preflight baselines.",
+      },
+      {
+        coverImage: {
+          src: "/astropulse_report.png",
+          alt: "AstroPulse combined bone-health report.",
+        },
+        description:
+          "Combined analysis of biomarker changes, reported symptoms, and exercise adherence.",
+      },
+    ],
+
+    challenges: [
+      {
+        challenge:
+          "Developing a health-monitoring prototype without access to live astronaut medical data.",
+        decision:
+          "Built a mock REST API using clearly labeled simulated measurements, allowing the team to develop and demonstrate health-data processing without depending on restricted NASA data sources.",
+      },
+      {
+        challenge:
+          "Analyzing bone-health indicators without directly measuring bone mineral density.",
+        decision:
+          "Focused on measurable biomarker changes, preflight baseline comparisons, and longitudinal trends while keeping descriptive analysis separate from unsupported medical predictions.",
+      },
+      {
+        challenge:
+          "Combining multiple health indicators into a consistent analysis workflow.",
+        decision:
+          "Separated biomarker, trend, symptom, and exercise calculations into modular functions and combined their results into a structured JSON response for frontend integration.",
+      },
+      {
+        challenge:
+          "Delivering working backend functionality within a two-day hackathon.",
+        decision:
+          "Prioritized a functional API, reusable analysis modules, automated tests, and GitHub collaboration to deliver an integration-ready backend within the event deadline.",
+      },
+    ],
+
+    links: {
+      github: "https://github.com/SpaceGo6/spacego",
+      live: "https://astropulse-b5b55.web.app/",
+    },
+  },
+
+  {
+    title: "Data Table",
     date: "2026-02-01",
     description: {
       short:
@@ -187,14 +319,14 @@ const Projects: Project[] = [
       "Built my first personal full-stack MERN inventory system with REST API routes, MongoDB schemas, JWT authentication, Joi validation, Cloudinary image uploads, and organized workflows for inventory, orders, shipments, refunds, billing, and transaction records. The project is feature-heavy and learning-focused, showing my early process of applying many full-stack concepts in one system.",
 
     architecture: {
-      src: "/placeholder-image.png",
+      src: "/datatable_architecture.png",
       alt: "Architecture diagram for Inventory Tracker showing React, Express, MongoDB, Mongoose, JWT, and Cloudinary.",
     },
 
     screenshots: [
       {
         coverImage: {
-          src: "/placeholder-image.png",
+          src: "/datatable_transactions.png",
           alt: "Inventory Tracker transactions table preview.",
         },
         description:
@@ -202,7 +334,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "/placeholder-image.png",
+          src: "/datatable_orders.png",
           alt: "Inventory Tracker order detail preview.",
         },
         description:
@@ -210,7 +342,7 @@ const Projects: Project[] = [
       },
       {
         coverImage: {
-          src: "/placeholder-image.png",
+          src: "/datatable_stock.png",
           alt: "Inventory Tracker stock view preview.",
         },
         description:

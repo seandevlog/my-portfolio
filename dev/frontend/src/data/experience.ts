@@ -2,8 +2,16 @@ import type Experience from "@/types/experience";
 
 const Experiences: Experience[] = [
   {
+    timeline: "Sep 2026 - Present",
+    company: "Unity Toronto",
+    role: "Software Engineer Intern",
+    description:
+      "Maintained and improved a Wix-based website through UI/UX enhancements, bug fixes, and content updates. Conducted SEO and website architecture audits, mapped approximately 170 URLs, and planned navigation improvements to streamline user journeys and support conversions.",
     category: "Development",
-    timeline: "2026 - Present",
+  },
+  {
+    category: "Development",
+    timeline: "Mar 2026 - Sep 2026",
     company: "Municipality of San Lorenzo Ruiz",
     role: "Web Developer",
     description: "Designing and developing a full-stack municipal web platform focused on public information, content management, and administrative workflows. Built frontend interfaces, backend API systems, database models, image storage workflows, and deployment-ready architecture to support secure, maintainable government communication."
@@ -35,7 +43,7 @@ const Experiences: Experience[] = [
     company: "Self-employed",
     role: "Fitness Coach",
     description: "Guided clients through beginner-friendly workout plans, form correction, progress check-ins, and goal-based coaching. Built trust through patience, encouragement, and consistent follow-up while helping clients feel supported and confident."
-  }
+  },
 ];
 
 export default Experiences;

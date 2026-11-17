@@ -4,8 +4,19 @@ import { useProject } from "@/contexts/ProjectContext";
 import Button from "../ui/Button";
 import Link from "next/link";
 
+const liveLinkLabels = {
+  Client: "Visit_Website",
+  Personal: "Live_Demo",
+  Academic: "View_Demo",
+  Professional: "View_Project",
+  Prototype: "View_Prototype",
+  "Open Source": "Try_Demo",
+} as const;
+
 export default function ProjectHeader() {
   const project = useProject();
+
+  const liveLinkLabel = liveLinkLabels[project.type] ?? "Live_Demo";
 
   return (
     <header
@@ -53,7 +64,9 @@ export default function ProjectHeader() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Button mode="secondary">Live_Demo</Button>
+            <Button mode="secondary">
+              {liveLinkLabel}
+            </Button>
           </Link>
         ) : null}
 

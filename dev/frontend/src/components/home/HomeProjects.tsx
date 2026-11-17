@@ -38,7 +38,9 @@ export default function HomeProjects() {
           </h2>
         </div>
 
-        <ProjectsShowcase projects={Projects} />
+        <ProjectsShowcase projects={[...Projects].sort(
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+        )} />
       </div>
     </section>
   );
